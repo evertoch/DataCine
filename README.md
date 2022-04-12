@@ -1,2 +1,3 @@
-# SISCONCIN_PlayHouse
-Sistema para gerenciamento e controle de cinemas
+# congercin_ph
+
+Projeto BDI para um sistema de gerenciamento e controle de cinemas
