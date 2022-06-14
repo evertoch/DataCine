@@ -64,13 +64,13 @@ insert into filme (idfilm, nomBR, nomEN, anolanfan, sinfil, dubleg, durfil, clai
 insert into filme (idfilm, nomBR, nomEN, anolanfan, sinfil, dubleg, durfil, claind, mesexi, iddir, idgen) values (2, 'Sonic 2', 'Sonic 2', 2022, 'Teste', 1,'1:45', 16, 3, 2, 6);
 
 -- insert na tabela ingresso
+insert into ingresso (datven, idfilm, valing) values ('14/03/2021', 1, 24);
+insert into ingresso (datven, idfilm, valing) values ('14/03/2021', 1, 24);
 insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 24);
-insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 24);
-insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 24);
+insert into ingresso (datven, idfilm, valing) values ('14/03/2021', 1, 12);
 insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 12);
 insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 12);
-insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 12);
-insert into ingresso (datven, idfilm, valing) values ('16/02/2022', 2, 12);
+insert into ingresso (datven, idfilm, valing) values ('16/02/2021', 2, 12);
 insert into ingresso (datven, idfilm, valing) values ('16/02/2022', 2, 12);
 insert into ingresso (datven, idfilm, valing) values ('16/02/2022', 2, 24);
 

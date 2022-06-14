@@ -15,5 +15,6 @@ order by s.nomsal desc;
 select f.idfilm "Código do filme", f.nomBR "Nome em português", f.mesexi "Mês da bilheteria", extract(month from i.datven) "Mês da venda", extract(year from i.datven) "Ano da venda", count(i.idfilm) "Quantidade de ingressos vendidos"
 from filme f 
 inner join ingresso i on f.idfilm = i.idfilm 
-where extract(year from i.datven) between '2020' and '2022'
-group by f.idfilm, i.datven, f.nombr, f.mesexi, i.datven;
+where extract(year from i.datven) between '2020' and '2021'
+group by f.idfilm, i.datven, f.nombr, f.mesexi, i.datven
+order by "Quantidade de ingressos vendidos" desc;
