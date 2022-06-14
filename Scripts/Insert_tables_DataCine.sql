@@ -60,8 +60,8 @@ insert into horario_funcionario (idhor, idfuncionario, idfuncao) values (1, 5, 2
 insert into horario_funcionario (idhor, idfuncionario, idfuncao) values (1, 6, 6);
 
 -- insert na tabela filme
-insert into filme (nomBR, nomEN, anolanfan, sinfil, dubleg, iddir, idgen) values ('Doutor Estranho 2', 'Stranger Doctor 2', 2022, 'Sinopse teste', 1, 4, 5);
-insert into filme (nomBR, nomEN, anolanfan, sinfil, dubleg, iddir, idgen) values ('Sonic 2', 'Sonic 2', 2022, 'Teste', 1, 2, 6);
+insert into filme (nomBR, nomEN, anolanfan, sinfil, dubleg, iddir, idgen, durfil) values ('Doutor Estranho 2', 'Stranger Doctor 2', 2022, 'Sinopse teste', 1, 4, 5, '02:00');
+insert into filme (nomBR, nomEN, anolanfan, sinfil, dubleg, iddir, idgen, durfil) values ('Sonic 2', 'Sonic 2', 2022, 'Teste', 1, 2, 6, '1:45');
 
 -- insert na tabela sala_filme
 insert into sala_filme (idsala, idfilm, idhor) values (1, 2, 1);
