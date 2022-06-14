@@ -1,10 +1,10 @@
-select f.nomBR "Nome do filme em português (PT-BR)", f.nomEN "Nome em Ingês (EN-US)", f.durfil "Tempo de duração",  g.nomgen "Genêro do filme"
+select f.nomBR "Nome em português (PT-BR)", f.nomEN "Nome em Ingês (EN-US)", f.durfil "Tempo de duração",  g.nomgen "Gênero do filme"
 from filme f
 inner join genero g on f.idgen = g.idgen
-order by durfil desc
+order by durfil desc;
 
 
-select f.nomBR "Nome do filme BR", f.nomEN "Nome em Ingês", s.nomsal "Sala de exibição"
+select f.nomBR "Nome do filme (PT-BR)", f.nomEN "Nome do filme (EN-US)", s.nomsal "Sala de exibição"
 from sala_filme sf
 inner join filme f on sf.idfilm = f.idfilm 
 inner join sala s on sf.idsala = s.idsal
@@ -12,9 +12,19 @@ where f.durfil > '1:30'
 order by s.nomsal desc;
 
 
-select f.idfilm "Código do filme", f.nomBR "Nome em português", f.mesexi "Mês da bilheteria", extract(month from i.datven) "Mês da venda", extract(year from i.datven) "Ano da venda", count(i.idfilm) "Quantidade de ingressos vendidos"
+select f.idfilm "Código do filme", f.nomBR "Nome do filme (PT-BR)", f.nomen "Nome do filme (EN-US)", f.mesexi "Mês da bilheteria", extract(month from i.datven) "Mês da venda", extract(year from i.datven) "Ano da venda", count(i.idfilm) "Quantidade de ingressos vendidos"
 from filme f 
 inner join ingresso i on f.idfilm = i.idfilm 
 where extract(year from i.datven) between '2020' and '2021'
-group by f.idfilm, i.datven, f.nombr, f.mesexi, i.datven
+group by f.idfilm, i.datven, f.nombr, f.mesexi, i.datven, f.nomen 
 order by "Quantidade de ingressos vendidos" desc;
+
+
+select f.idfilm "Código do filme", f.nomBR "Nome do filme (PT-BR)", f.nomen "Nome do filme (EN-US)", count(i.idfilm) "Quantidade de ingressos vendidos", sum(i.valing) "Valor total R$"
+from filme f
+inner join ingresso i on f.idfilm = i.idfilm
+where f.idgen in (select idgen from genero where nomgen not in ('Drama'))
+and f.anolanfan >= 2018
+and f.claind >= 12
+group by f.idfilm, f.nomBR, f.nomen
+order by "Valor total R$" desc;
