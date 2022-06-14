@@ -24,6 +24,7 @@ CREATE TABLE filme (
   dubleg    int4 DEFAULT 0, 
   iddir     int4 NOT NULL, 
   idgen     int4 NOT NULL, 
+  durfil    time not null,
   PRIMARY KEY (idfilm));
  
 COMMENT ON TABLE filme IS 'Tabela para cadastro do filme';
