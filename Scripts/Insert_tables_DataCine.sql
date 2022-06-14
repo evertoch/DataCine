@@ -64,12 +64,11 @@ insert into filme (nomBR, nomEN, anolanfan, sinfil, dubleg, iddir, idgen) values
 insert into filme (nomBR, nomEN, anolanfan, sinfil, dubleg, iddir, idgen) values ('Sonic 2', 'Sonic 2', 2022, 'Teste', 1, 2, 6);
 
 -- insert na tabela sala_filme
-insert into sala_filme (idsala, idfilm, idhor) values (1, 3, 1);
-insert into sala_filme (idsala, idfilm, idhor) values (2, 3, 2);
+insert into sala_filme (idsala, idfilm, idhor) values (1, 2, 1);
+insert into sala_filme (idsala, idfilm, idhor) values (2, 1, 2);
 insert into sala_filme (idsala, idfilm, idhor) values (4, 2, 1);
-insert into sala_filme (idsala, idfilm, idhor) values (3, 3, 3);
+insert into sala_filme (idsala, idfilm, idhor) values (3, 1, 3);
 insert into sala_filme (idsala, idfilm, idhor) values (5, 2, 3);
 
 -- insert na tabela filme_premiacao
 insert into filme_premiacao (idpre, idfilm, gan) values (4, 2, 0);
- 
