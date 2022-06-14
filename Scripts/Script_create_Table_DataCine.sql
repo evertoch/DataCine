@@ -22,9 +22,11 @@ CREATE TABLE filme (
   anolanfan int4, 
   sinfil    varchar(255), 
   dubleg    int4 DEFAULT 0, 
+  durfil    time, 
+  claind    int4, 
+  mesexi    int4, 
   iddir     int4 NOT NULL, 
   idgen     int4 NOT NULL, 
-  durfil    time not null,
   PRIMARY KEY (idfilm));
  
 COMMENT ON TABLE filme IS 'Tabela para cadastro do filme';
@@ -34,6 +36,22 @@ COMMENT ON COLUMN filme.nomEN IS 'Nome do filme fora do Brasil';
 COMMENT ON COLUMN filme.anolanfan IS 'Ano de lançamento do filme';
 COMMENT ON COLUMN filme.sinfil IS 'Coluna para breve descrição da sinopse do filme';
 COMMENT ON COLUMN filme.dubleg IS 'Flag de definição para filme dublado ou não (não encontrei o tipo booleano).';
+COMMENT ON COLUMN filme.durfil IS 'Controle da duração do filme, em horas.';
+COMMENT ON COLUMN filme.claind IS 'Classificação indicativa de idade para o filme';
+COMMENT ON COLUMN filme.mesexi IS 'Mês de exibição do filme. Iniciando em 1 - Janeiro e 12 - Dezembro.';
+
+CREATE TABLE ingresso (
+  iding  SERIAL NOT NULL, 
+  datven date NOT NULL, 
+  idfilm int4 NOT NULL, 
+  valing int4, 
+  PRIMARY KEY (iding));
+ 
+COMMENT ON TABLE ingresso IS 'Coluna para registrar os ingressos vendidos';
+COMMENT ON COLUMN ingresso.iding IS 'Id do ingresso';
+COMMENT ON COLUMN ingresso.datven IS 'Data da venda do ingresso';
+COMMENT ON COLUMN ingresso.idfilm IS 'Id do filme que o ingresso vale';
+COMMENT ON COLUMN ingresso.valing IS 'Valor cobrado pelo ingresso.';
 
 CREATE TABLE funcao (
   idfun  SERIAL NOT NULL, 
@@ -129,6 +147,7 @@ COMMENT ON COLUMN filme_premiacao.id_fil_pre IS 'Chave primária';
 ALTER TABLE funcionario ADD CONSTRAINT FUNCIONARIO_FK FOREIGN KEY (codcin) REFERENCES Cinema (codcin);
 ALTER TABLE filme ADD CONSTRAINT FILME_FK FOREIGN KEY (idgen) REFERENCES genero (idgen);
 ALTER TABLE filme ADD CONSTRAINT FILME_FK2 FOREIGN KEY (iddir) REFERENCES diretor (iddir);
+ALTER TABLE ingresso ADD CONSTRAINT INGRESSO_FK FOREIGN KEY (idfilm) REFERENCES filme (idfilm);
 ALTER TABLE horario_funcionario ADD CONSTRAINT HORARIO_FUNCIONARIO_FK FOREIGN KEY (idfuncao) REFERENCES funcao (idfun);
 ALTER TABLE horario_funcionario ADD CONSTRAINT HORARIO_FUNCIONARIO_FK2 FOREIGN KEY (idfuncionario) REFERENCES funcionario (cartrab);
 ALTER TABLE horario_funcionario ADD CONSTRAINT HORARIO_FUNCIONARIO_FK3 FOREIGN KEY (idhor) REFERENCES horario (idhor);
