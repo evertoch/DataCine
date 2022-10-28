@@ -126,9 +126,9 @@ COMMENT ON COLUMN premiacao.anopre IS 'Ano da premiação';
 
 CREATE TABLE sala (
   idsal  SERIAL NOT NULL 		, 
-  nomsal varchar(45), 
-  capsal int4, 
-  PRIMARY KEY (idsal));
+  nomsal varchar(45) NOT NULL, 
+  capsal int4 NOT NULL, 
+  PRIMARY KEY (idsal)) ;
   
 COMMENT ON TABLE sala IS 'Tabela para cadastro das salas de cinema';
 COMMENT ON COLUMN sala.idsal IS 'Identificador da sala de cinema';
