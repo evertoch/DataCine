@@ -83,3 +83,17 @@ insert into sala_filme (idsala, idfilm, idhor) values (5, 2, 3);
 
 -- insert na tabela filme_premiacao
 insert into filme_premiacao (idpre, idfilm, gan) values (4, 2, 0);
+
+-- insert na tabela cardápio
+insert into cardapio (desali) values ('Pipoca');
+insert into cardapio (desali) values ('Refrigerante');
+
+-- insernet na tablea tickets
+insert into ticket (datven, idfilm, idali) values ('14/01/2021', 1, 1);
+insert into ticket (datven, idfilm, idali) values ('14/01/2021', 1, 2);
+insert into ticket (datven, idfilm, idali) values ('14/01/2021', 2, 1);
+insert into ticket (datven, idfilm, idali) values ('14/01/2021', 2, 2);
+insert into ticket (datven, idfilm, idali) values ('16/04/2022', 1, 1);
+insert into ticket (datven, idfilm, idali) values ('16/04/2022', 1, 2);
+insert into ticket (datven, idfilm, idali) values ('16/04/2022', 2, 1);
+insert into ticket (datven, idfilm, idali) values ('16/04/2022', 2, 2);

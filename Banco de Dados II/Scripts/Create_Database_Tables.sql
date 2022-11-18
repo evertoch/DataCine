@@ -144,6 +144,26 @@ CREATE TABLE sala_filme (
   
 COMMENT ON COLUMN sala_filme.id_sal_fil IS 'Chave primária';
 
+CREATE TABLE cardapio (
+  idali  SERIAL NOT NULL, 
+  desali varchar(40) NOT NULL, 
+  PRIMARY KEY (idali));
+  
+COMMENT ON TABLE cardapio IS 'Tabela criada para registrar os alimentos e bebidas disponíveis';
+COMMENT ON COLUMN cardapio.idali IS 'ID do alimento';
+COMMENT ON COLUMN cardapio.desali IS 'Descrição do alimento';
+
+CREATE TABLE ticket (
+  intic  SERIAL NOT NULL, 
+  datven date NOT NULL, 
+  idfilm int4 NOT NULL, 
+  idali  int4 NOT NULL, 
+  PRIMARY KEY (intic));
+  
+COMMENT ON TABLE ticket IS 'Tabela para registrar os tickets de alimetos vendidos';
+COMMENT ON COLUMN ticket.intic IS 'ID (identificador) do ticket vendido';
+COMMENT ON COLUMN ticket.datven IS 'Data da venda do ticket';
+
 ALTER TABLE funcionario ADD CONSTRAINT FUNCIONARIO_FK FOREIGN KEY (codcin) REFERENCES Cinema (codcin);
 ALTER TABLE filme ADD CONSTRAINT FILME_FK FOREIGN KEY (idgen) REFERENCES genero (idgen);
 ALTER TABLE filme ADD CONSTRAINT FILME_FK2 FOREIGN KEY (iddir) REFERENCES diretor (iddir);
@@ -156,3 +176,5 @@ ALTER TABLE sala_filme ADD CONSTRAINT SALA_FILME_FK2 FOREIGN KEY (idsala) REFERE
 ALTER TABLE sala_filme ADD CONSTRAINT SALA_FILME_FK3 FOREIGN KEY (idhor) REFERENCES horario (idhor);
 ALTER TABLE filme_premiacao ADD CONSTRAINT FILME_PREMIACAO_FK FOREIGN KEY (idfilm) REFERENCES filme (idfilm);
 ALTER TABLE filme_premiacao ADD CONSTRAINT FILME_PREMIACAO_FK2 FOREIGN KEY (idpre) REFERENCES premiacao (idpre);
+ALTER TABLE ticket ADD CONSTRAINT TICKET_FK FOREIGN KEY (idali) REFERENCES cardapio (idali);
+ALTER TABLE ticket ADD CONSTRAINT TICKET_FK2 FOREIGN KEY (idfilm) REFERENCES filme (idfilm);

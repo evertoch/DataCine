@@ -1,12 +1,13 @@
--- Configuração de políticas de acesso: criação de usuários, grupos e concessão de privilégios.
-
 -- Criação dos grupos.
-
-create group Funcionario;
 
 create group Desenvolvedor;
 
-create group Scrum;
+create group Gerente;
+
+create group Administrativo;
+
+create group Atendente;
+
 
 -- Criação dos usuários.
 
@@ -21,35 +22,61 @@ with password 'guilherme123';
 create user lucas
 with password 'lucas123';
 
-create user usuario
-with password 'usuario123';
+create user gerente1
+with password 'gerente123';
+
+create user administrativo1
+with password 'administrativo123';
+
+create user atendente1
+with password 'atendente123';
+
 
 
 -- Adicionando os usuários aos grupos;
 
-grant scrum to everto;
+grant desenvolvedor to everto;
 
 grant desenvolvedor to guilherme;
 
 grant desenvolvedor to lucas;
 
-grant funcionario to usuario;
+grant gerente to gerente1;
 
--- Conceções de permissões ao grupo "Scrum".
+grant administrativo to administrativo1;
 
-grant all privileges
-on all tables in schema public
-to scrum;
+grant atendente to atendente1;
 
 -- Conceções de permissões ao grupo "Desenvolvedor".
 
-grant insert, delete, update, references, trigger
-on all tables in schema public
-to desenvolvedor
-with grant option;
+-- ao grupo de "desenvolvedor" é concedido total privilégio em todas as tabelas.
 
--- Conceções de permissões ao grupo "Funcionario".
-
-grant insert, delete, update
+grant all privileges
 on all tables in schema public
-to funcionario;
+to desenvolvedor;
+
+-- Conceções de permissões ao grupo "Gerente".
+
+-- Ao grupo de "gerente" são concedidos apenas as permissões permitindo-o "mexer" de forma básica no banco, mas em todas as tabelas.
+
+grant select, insert, delete, update
+on all tables in schema public
+to gerente;
+
+
+-- Conceções de permissões ao grupo "Administrativo".
+
+-- Ao grupo de "Administrativo" são concedidos algumas permissões básicas, mas tabelas pertinentes apenas a sua devida função.
+
+grant select, insert, delete, update
+on filme, diretor, genero, sala, sala_filme, premiacao, filme_premiacao 
+to administrativo;
+
+
+-- Conceções de permissões ao grupo "atendente".
+
+-- Ao grupo de "atendente" são concedidos as mesmas permissões que o grupo "administrativo", mas apenas nas tabelas pertinentes apenas a sua devida função.
+
+grant select, insert, delete, update
+on filme, ticket, ingresso
+to atendente;

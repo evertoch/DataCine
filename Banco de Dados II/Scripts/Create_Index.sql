@@ -17,10 +17,7 @@ create index hor_fun_idfuncao_sk
 
 create index hor_fun_idhor_sk
 	on horario_funcionario(idhor);
-	
-create index hor_fun_idfuncao_sk
-	on horario_funcionario(idfuncao);
-	
+		
 create index sal_fil_idfilm_sk
 	on sala_filme(idfilm);
 	
@@ -35,6 +32,12 @@ create index fil_pre_idfilm_sk
 	
 create index fil_pre_idpre_sk
 	on filme_premiacao(idpre);
+	
+create index tic_idfilm_sk
+	on ticket(idfilm);
+
+create index tic_idali_sk
+	on ticket(idali);
 
 -- Criação dos índices colunas mais usadas
 
@@ -53,9 +56,3 @@ create index funcao_nomfun_sk
 create index funcionario_nomfun_sk
 	on funcionario(nomfun);
 
-
-
-
-
-
-	
