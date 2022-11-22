@@ -164,6 +164,25 @@ COMMENT ON TABLE ticket IS 'Tabela para registrar os tickets de alimetos vendido
 COMMENT ON COLUMN ticket.intic IS 'ID (identificador) do ticket vendido';
 COMMENT ON COLUMN ticket.datven IS 'Data da venda do ticket';
 
+CREATE TABLE filme_auditoria (
+  id_log       SERIAL NOT NULL, 
+  id_filme_new int4, 
+  id_filme_old int4, 
+  dat_alt      timestamp NOT NULL, 
+  usu_alt      varchar(25) NOT NULL, 
+  dml          text NOT NULL, 
+  PRIMARY KEY (id_log));
+  
+COMMENT ON TABLE filme_auditoria IS 'Tabela para gravar os logs de alteração na tabela filme';
+COMMENT ON COLUMN filme_auditoria.id_log IS 'ID do log';
+COMMENT ON COLUMN filme_auditoria.id_filme_new IS 'Id do filme adicionado.';
+COMMENT ON COLUMN filme_auditoria.id_filme_old IS 'Id do filme alterado.';
+COMMENT ON COLUMN filme_auditoria.dat_alt IS 'Data e hora da alteração da alteração';
+COMMENT ON COLUMN filme_auditoria.usu_alt IS 'Usuario que fez a alteração do filme';
+COMMENT ON COLUMN filme_auditoria.dml IS 'Comando executado.';
+
+
+
 ALTER TABLE funcionario ADD CONSTRAINT FUNCIONARIO_FK FOREIGN KEY (codcin) REFERENCES Cinema (codcin);
 ALTER TABLE filme ADD CONSTRAINT FILME_FK FOREIGN KEY (idgen) REFERENCES genero (idgen);
 ALTER TABLE filme ADD CONSTRAINT FILME_FK2 FOREIGN KEY (iddir) REFERENCES diretor (iddir);
