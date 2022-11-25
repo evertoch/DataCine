@@ -29,12 +29,12 @@ select * from vw_filme_sala;
 -- Relacionar o código do filme, nome do filme, mês da bilheteria, quantidade total de ingressos vendidos no mês para meses entre anos de 2020 e 2021. 
 -- Ordene o relatório do filme com mais vendas(em termos de quantidade de ingressos) para o produto com menos vendas;
 
-create view vw_filme_ingressos as
-select f.idfilm "Código do filme", f.nomBR "Nome do filme (PT-BR)", f.nomen "Nome do filme (EN-US)", f.mesexi "Mês da bilheteria", extract(month from i.datven) "Mês da venda", extract(year from i.datven) "Ano da venda", count(i.idfilm) "Quantidade de ingressos vendidos"
-from filme f 
-inner join ingresso i on f.idfilm = i.idfilm 
+select sf.idfilm "Código do filme", f.nomBR "Nome do filme (PT-BR)", f.nomen "Nome do filme (EN-US)", f.mesexi "Mês da bilheteria", extract(month from i.datven) "Mês da venda", extract(year from i.datven) "Ano da venda", count(i.id_sal_fil) "Quantidade de ingressos vendidos"
+from sala_filme sf 
+inner join filme f on f.idfilm = sf.idfilm 
+inner join ingresso i on sf.id_sal_fil = i.id_sal_fil
 where extract(year from i.datven) between '2020' and '2021'
-group by f.idfilm, i.datven, f.nombr, f.mesexi, i.datven, f.nomen 
+group by sf.idfilm, i.datven, f.nombr, f.mesexi, f.nomen 
 order by "Quantidade de ingressos vendidos" desc;
 
 select * from vw_filme_ingressos;
@@ -44,9 +44,10 @@ select * from vw_filme_ingressos;
 -- Filtrar somente filmes, excetuandose dramas, lançados a partir de 2018 e com restrição de idade para maiores de 12 anos. 
 -- Ordene o relatório do filme com mais bilheteria para o filme com menos bilheteria.
 create view vw_filme_valor as
-select f.idfilm "Código do filme", f.nomBR "Nome do filme (PT-BR)", f.nomen "Nome do filme (EN-US)", count(i.idfilm) "Quantidade de ingressos vendidos", sum(i.valing) "Valor total R$"
+select f.idfilm "Código do filme", f.nomBR "Nome do filme (PT-BR)", f.nomen "Nome do filme (EN-US)", count(i.id_sal_fil) "Quantidade de ingressos vendidos", sum(i.valing) "Valor total R$"
 from filme f
-inner join ingresso i on f.idfilm = i.idfilm
+inner join sala_filme sf on f.idfilm = sf.idfilm
+inner join ingresso i on sf.id_sal_fil = i.id_sal_fil
 inner join genero g on f.idgen = g.idgen
 where f.anolanfan >= 2018
 and f.claind >= 12

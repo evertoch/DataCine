@@ -9,8 +9,8 @@ create index fil_idgen_sk
 create index fil_iddir_sk
 	on filme(iddir);
 	
-create index ing_idfilm_sk
-	on ingresso(idfilm);
+create index ing_id_sal_fil_sk
+	on ingresso(id_sal_fil);
 	
 create index hor_fun_idfuncao_sk
 	on horario_funcionario(idfuncao);

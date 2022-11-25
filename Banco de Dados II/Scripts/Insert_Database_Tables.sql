@@ -63,23 +63,24 @@ insert into horario_funcionario (idhor, idfuncionario, idfuncao) values (1, 6, 6
 insert into filme (idfilm, nomBR, nomEN, anolanfan, sinfil, dubleg, durfil, claind, mesexi, iddir, idgen) values (1, 'Doutor Estranho 2', 'Stranger Doctor 2', 2022, 'Sinopse teste', 1, '02:00', 16, 3, 4, 5);
 insert into filme (idfilm, nomBR, nomEN, anolanfan, sinfil, dubleg, durfil, claind, mesexi, iddir, idgen) values (2, 'Sonic 2', 'Sonic 2', 2022, 'Teste', 1,'1:45', 16, 3, 2, 6);
 
--- insert na tabela ingresso
-insert into ingresso (datven, idfilm, valing) values ('14/01/2021', 1, 12.00);
-insert into ingresso (datven, idfilm, valing) values ('14/03/2021', 1, 24.00);
-insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 24.00);
-insert into ingresso (datven, idfilm, valing) values ('14/01/2021', 1, 12.00);
-insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 12.00);
-insert into ingresso (datven, idfilm, valing) values ('14/03/2022', 1, 12.00);
-insert into ingresso (datven, idfilm, valing) values ('16/01/2021', 2, 12.00);
-insert into ingresso (datven, idfilm, valing) values ('16/02/2022', 2, 12.00);
-insert into ingresso (datven, idfilm, valing) values ('16/04/2022', 2, 24.00);
-
 -- insert na tabela sala_filme
 insert into sala_filme (idsala, idfilm, idhor) values (1, 2, 1);
 insert into sala_filme (idsala, idfilm, idhor) values (2, 1, 2);
 insert into sala_filme (idsala, idfilm, idhor) values (4, 2, 1);
 insert into sala_filme (idsala, idfilm, idhor) values (3, 1, 3);
 insert into sala_filme (idsala, idfilm, idhor) values (5, 2, 3);
+
+-- insert na tabela ingresso
+insert into ingresso (datven, id_sal_fil, valing) values ('14/01/2021', 1, 12.00);
+insert into ingresso (datven, id_sal_fil, valing) values ('14/03/2021', 1, 24.00);
+insert into ingresso (datven, id_sal_fil, valing) values ('14/03/2022', 1, 24.00);
+insert into ingresso (datven, id_sal_fil, valing) values ('14/01/2021', 1, 12.00);
+insert into ingresso (datven, id_sal_fil, valing) values ('14/03/2022', 1, 12.00);
+insert into ingresso (datven, id_sal_fil, valing) values ('14/03/2022', 1, 12.00);
+insert into ingresso (datven, id_sal_fil, valing) values ('16/01/2021', 2, 12.00);
+insert into ingresso (datven, id_sal_fil, valing) values ('16/02/2022', 2, 12.00);
+insert into ingresso (datven, id_sal_fil, valing) values ('16/04/2022', 2, 24.00);
+
 
 -- insert na tabela filme_premiacao
 insert into filme_premiacao (idpre, idfilm, gan) values (4, 2, 0);

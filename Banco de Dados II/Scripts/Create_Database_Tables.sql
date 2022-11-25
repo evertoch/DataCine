@@ -101,17 +101,17 @@ CREATE TABLE horario_funcionario (
 COMMENT ON COLUMN horario_funcionario.id_hor_fun IS 'Chave primária';
 
 CREATE TABLE ingresso (
-  iding  SERIAL NOT NULL, 
-  datven date NOT NULL, 
-  idfilm int4 NOT NULL, 
-  valing numeric(5, 2) NOT NULL, 
+  iding      SERIAL NOT NULL, 
+  datven     date NOT NULL, 
+  valing     numeric(5, 2) NOT NULL, 
+  id_sal_fil int4 NOT NULL, 
   PRIMARY KEY (iding));
   
-COMMENT ON TABLE ingresso IS 'Coluna para registrar os ingressos vendidos';
+COMMENT ON TABLE ingresso IS 'Tabela para registrar os ingressos vendidos';
 COMMENT ON COLUMN ingresso.iding IS 'Id do ingresso';
 COMMENT ON COLUMN ingresso.datven IS 'Data da venda do ingresso';
-COMMENT ON COLUMN ingresso.idfilm IS 'Id do filme que o ingresso vale';
 COMMENT ON COLUMN ingresso.valing IS 'Valor cobrado pelo ingresso.';
+  
 
 CREATE TABLE premiacao (
   idpre  SERIAL NOT NULL, 
@@ -136,13 +136,14 @@ COMMENT ON COLUMN sala.nomsal IS 'Nome da sala de cinema';
 COMMENT ON COLUMN sala.capsal IS 'Capacidade da sala de cinema';
 
 CREATE TABLE sala_filme (
+  id_sal_fil SERIAL NOT NULL, 
   idsala     int4 NOT NULL, 
   idfilm     int4 NOT NULL, 
   idhor      int4 NOT NULL, 
-  id_sal_fil SERIAL NOT NULL, 
   PRIMARY KEY (id_sal_fil));
-  
+
 COMMENT ON COLUMN sala_filme.id_sal_fil IS 'Chave primária';
+
 
 CREATE TABLE cardapio (
   idali  SERIAL NOT NULL, 
@@ -186,7 +187,7 @@ COMMENT ON COLUMN filme_auditoria.dml IS 'Comando executado.';
 ALTER TABLE funcionario ADD CONSTRAINT FUNCIONARIO_FK FOREIGN KEY (codcin) REFERENCES Cinema (codcin);
 ALTER TABLE filme ADD CONSTRAINT FILME_FK FOREIGN KEY (idgen) REFERENCES genero (idgen);
 ALTER TABLE filme ADD CONSTRAINT FILME_FK2 FOREIGN KEY (iddir) REFERENCES diretor (iddir);
-ALTER TABLE ingresso ADD CONSTRAINT INGRESSO_FK FOREIGN KEY (idfilm) REFERENCES filme (idfilm);
+ALTER TABLE ingresso ADD CONSTRAINT INGRESSO_FK FOREIGN KEY (id_sal_fil) REFERENCES sala_filme (id_sal_fil);
 ALTER TABLE horario_funcionario ADD CONSTRAINT HORARIO_FUNCIONARIO_FK FOREIGN KEY (idfuncao) REFERENCES funcao (idfun);
 ALTER TABLE horario_funcionario ADD CONSTRAINT HORARIO_FUNCIONARIO_FK2 FOREIGN KEY (idfuncionario) REFERENCES funcionario (cartrab);
 ALTER TABLE horario_funcionario ADD CONSTRAINT HORARIO_FUNCIONARIO_FK3 FOREIGN KEY (idhor) REFERENCES horario (idhor);
@@ -197,3 +198,4 @@ ALTER TABLE filme_premiacao ADD CONSTRAINT FILME_PREMIACAO_FK FOREIGN KEY (idfil
 ALTER TABLE filme_premiacao ADD CONSTRAINT FILME_PREMIACAO_FK2 FOREIGN KEY (idpre) REFERENCES premiacao (idpre);
 ALTER TABLE ticket ADD CONSTRAINT TICKET_FK FOREIGN KEY (idali) REFERENCES cardapio (idali);
 ALTER TABLE ticket ADD CONSTRAINT TICKET_FK2 FOREIGN KEY (idfilm) REFERENCES filme (idfilm);
+
