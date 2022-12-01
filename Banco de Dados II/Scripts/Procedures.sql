@@ -25,3 +25,30 @@ language plpgsql;
 
 select * from func_bilheteria(2) as (Id_filme integer, ingressos_vendidos int8, valor_total numeric); 
 
+
+-- FUNCTION 02:
+-- Function para calcular a quantidade total de um determinado alimento vendido e o valor total de suas vendas (somando o valor de cada item).
+
+-- FUNCIONMANETO:
+-- O parâmetro a ser passado na chamada da function deverá ser o ID do alimento.
+
+-- Criação da Procedure:
+
+create or replace function func_qtd_pro(id_alimento integer) 
+returns SETOF record as 
+$body$
+declare
+begin 
+	return query
+		select desali, count(valali), sum(valali) from ticket t 
+		inner join cardapio c ON t.idali = c.idali
+		where c.idali = id_alimento
+		group by desali;
+return;
+end;
+$body$
+language plpgsql;
+
+-- Chamada da Procedure:
+
+select * from func_qtd_pro(1) as (Descricao varchar, Quantidade int8, valor_total int8); 
