@@ -21,7 +21,7 @@ CREATE TABLE filme (
   nomEN     varchar(45), 
   anolanfan int4 NOT NULL, 
   sinfil    varchar(255) NOT NULL, 
-  dubleg    int4 DEFAULT 0 NOT NULL, 
+  dubleg    char(1) DEFAULT '0' NOT NULL, 
   durfil    time NOT NULL, 
   claind    int4 NOT NULL, 
   mesexi    int4 NOT NULL, 
@@ -35,10 +35,12 @@ COMMENT ON COLUMN filme.nomBR IS 'Nome do filme no Brasil';
 COMMENT ON COLUMN filme.nomEN IS 'Nome do filme fora do Brasil';
 COMMENT ON COLUMN filme.anolanfan IS 'Ano de lançamento do filme';
 COMMENT ON COLUMN filme.sinfil IS 'Coluna para breve descrição da sinopse do filme';
-COMMENT ON COLUMN filme.dubleg IS 'Flag de definição para filme dublado ou não (não encontrei o tipo booleano).';
+COMMENT ON COLUMN filme.dubleg IS 'Flag de definição para filme dublado ou não.';
 COMMENT ON COLUMN filme.durfil IS 'Controle da duração do filme, em horas.';
 COMMENT ON COLUMN filme.claind IS 'Classificação indicativa de idade para o filme';
 COMMENT ON COLUMN filme.mesexi IS 'Mês de exibição do filme. Iniciando em 1 - Janeiro e 12 - Dezembro.';
+
+
 
 CREATE TABLE filme_premiacao (
   idpre      int4 NOT NULL, 
