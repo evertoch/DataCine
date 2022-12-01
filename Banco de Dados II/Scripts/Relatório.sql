@@ -29,6 +29,7 @@ select * from vw_filme_sala;
 -- Relacionar o código do filme, nome do filme, mês da bilheteria, quantidade total de ingressos vendidos no mês para meses entre anos de 2020 e 2021. 
 -- Ordene o relatório do filme com mais vendas(em termos de quantidade de ingressos) para o produto com menos vendas;
 
+create view vw_filme_ingressos as
 select sf.idfilm "Código do filme", f.nomBR "Nome do filme (PT-BR)", f.nomen "Nome do filme (EN-US)", f.mesexi "Mês da bilheteria", extract(month from i.datven) "Mês da venda", extract(year from i.datven) "Ano da venda", count(i.id_sal_fil) "Quantidade de ingressos vendidos"
 from sala_filme sf 
 inner join filme f on f.idfilm = sf.idfilm 
