@@ -86,8 +86,10 @@ insert into ingresso (datven, id_sal_fil, valing) values ('16/04/2022', 2, 24.00
 insert into filme_premiacao (idpre, idfilm, gan) values (4, 2, 0);
 
 -- insert na tabela cardápio
-insert into cardapio (desali) values ('Pipoca');
-insert into cardapio (desali) values ('Refrigerante');
+insert into cardapio (desali, valali) values ('Pipoca Pequena', 10);
+insert into cardapio (desali, valali) values ('Pipoca Média', 15);
+insert into cardapio (desali, valali) values ('Pipoca Grande', 20);
+insert into cardapio (desali, valali) values ('Refrigerante Lata', 6);
 
 -- insernet na tablea tickets
 insert into ticket (datven, idfilm, idali) values ('14/01/2021', 1, 1);

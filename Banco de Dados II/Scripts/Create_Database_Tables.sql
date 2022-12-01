@@ -148,11 +148,14 @@ COMMENT ON COLUMN sala_filme.id_sal_fil IS 'Chave primária';
 CREATE TABLE cardapio (
   idali  SERIAL NOT NULL, 
   desali varchar(40) NOT NULL, 
+  valali int4 NOT NULL, 
   PRIMARY KEY (idali));
   
 COMMENT ON TABLE cardapio IS 'Tabela criada para registrar os alimentos e bebidas disponíveis';
 COMMENT ON COLUMN cardapio.idali IS 'ID do alimento';
 COMMENT ON COLUMN cardapio.desali IS 'Descrição do alimento';
+COMMENT ON COLUMN cardapio.valali IS 'Valor do alimento';
+
 
 CREATE TABLE ticket (
   intic  SERIAL NOT NULL, 
