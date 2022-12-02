@@ -74,7 +74,6 @@ public class GreetingsController {
 		Filme filme = filmeRepository.findById(idfilme).get();
 		return new ResponseEntity<Filme>(filme, HttpStatus.OK);
 	}		
-	
 
     @GetMapping(value = "buscarFilmeNome")
 	@ResponseBody

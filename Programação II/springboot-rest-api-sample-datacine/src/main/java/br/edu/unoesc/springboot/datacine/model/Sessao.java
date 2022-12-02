@@ -1,0 +1,61 @@
+package br.edu.unoesc.springboot.datacine.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+@SequenceGenerator(name = "seq_sessao", sequenceName = "seq_sessao", allocationSize = 1, initialValue = 1)
+public class Sessao implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idsessao", length=10 , nullable=false, columnDefinition = "integer")
+	private Long idsessao;
+	
+	@ManyToOne
+	@JoinColumn(name="idfilme", referencedColumnName = "idfilme", nullable = false)
+	private Filme idfilme;
+	
+	@ManyToOne
+	@JoinColumn(name="idsala", referencedColumnName = "idsala", nullable = false)
+	private Sala idsala;
+
+	public Long getIdsessao() {
+		return idsessao;
+	}
+
+	public void setIdsessao(Long idsessao) {
+		this.idsessao = idsessao;
+	}
+
+	public Filme getIdfilme() {
+		return idfilme;
+	}
+
+	public void setIdfilme(Filme idfilme) {
+		this.idfilme = idfilme;
+	}
+
+	public Sala getIdsala() {
+		return idsala;
+	}
+
+	public void setIdsala(Sala idsala) {
+		this.idsala = idsala;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
+}
