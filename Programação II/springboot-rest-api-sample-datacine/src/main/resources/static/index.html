@@ -1,210 +1,322 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type = "text/css">
-html{
-	margin: 5%;
-}
-</style>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+	rel="stylesheet" 
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 
-<title>Spring boot - teste</title>
+	<link rel="icon" href="./images/iconPage.png">
+
+	<title>DataCine - Gestão de Cinema</title>
+	
+	<style>
+		:root{
+			--bs-body-bg: #DCDCDC;
+		}			
+	</style>
+	
 </head>
-<body>
-	<h3></h3>
 
-	<form action="" id="formCadastroUser">
-		<div class="mb-3">
-			<label for="id" class="form-label">ID</label> <input type="text"
-				class="form-control" id="id" readonly="readonly">
-		</div>
-		<div class="mb-3">
-			<label for="nome" class="form-label">Nome do usuário</label> <input
-				type="text" class="form-control" id="nome"
-				placeholder="Informe o nome" required="required">
-		</div>
-		<div class="mb-3">
-			<label for="idade" class="form-label">Idade</label> <input
-				type="number" class="form-control" id="idade"
-				placeholder="Informe a idade">
-		</div>
-	</form>
-	<button type="button" class="btn btn-primary" onclick="salvarUsuario()">Salvar</button>
-
-	<button type="button" class="btn btn-secondary"
-		onclick="document.getElementById('formCadastroUser').reset();">Novo</button>
-		
-	<button type="button" class="btn btn-danger" onclick="excluirUsuarioBotao()">Excluir</button>
-
-	<button type="button" class="btn btn-success" data-bs-toggle="modal"
-		data-bs-target="#modalPesquisarUser">Pesquisar</button>
-
-	<!-- Tela de pesquisa -->
-
-	<div class="modal fade" id="modalPesquisarUser" tabindex="-1"
-		aria-labelledby="Pesquisar Usuários" aria-hidden="true">
-		<div class="modal-dialog">
+<!--  Formulário Cadastro de filmes; -->
+	
+	<div class="formCadastroProduto row justify-content-center">
+		<h2 class="col-md-3">Cadastro de Filmes</h2><br>
+		<div class="w-100"></div>		
+		<form action="" id="formCadastroProduto" class="row justify-content-center">
+			<div class="col-md-1">
+	    		<label for="idfilme" class="form-label">ID</label>
+    			<input type="text" class="form-control" id="idfilme" readonly="readonly">
+			</div>
+  			<div class="col-4">
+	    		<label for="nome" class="form-label">Nome:</label>
+    			<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required">
+			</div>
+  			<div class="w-100"></div>
+  			<div class="col-md-2">
+		    	<label for="claind" class="form-label">Classificação Indicativa:</label>
+    			<input type="number" class="form-control" id="claind" placeholder="Idade" required = "required">
+  			</div>
+  			<div class="col-md-1">
+	    		<label for="dubleg" class="form-label">Dub/Leg:</label>
+    			<select id="dubleg" class="form-select" required = "required">
+	      			<option value="D">Dublado</option>
+      				<option value="L">Legendado</option>
+    			</select>
+  			</div>
+  			<div class="col-md-2">
+	    		<label for="mesexi" class="form-label">Mês de Exibição:</label>
+    			<select id="mesexi" class="form-select" required = "required">
+    				<option value="00" selected>Fora de Exibição</option>
+      				<option value="01" >Janeiro</option>
+      				<option value="02" >Fevereiro</option>
+      				<option value="03" >Março</option>
+      				<option value="04" >Abril</option>
+      				<option value="05" >Maio</option>
+      				<option value="06" >Junho</option>
+      				<option value="07" >Julho</option>
+      				<option value="08" >Agosto</option>
+      				<option value="09" >Setembro</option>
+      				<option value="10" >Outubro</option>
+      				<option value="11" >Novembro</option>
+      				<option value="12" >Dezembro</option>
+    			</select>
+  			</div>
+  			
+  			<div class="w-100"></div>
+  			<div class="col-md-5">
+  				<label for="sinfil" class="form-label">Sinopse:</label>
+  				<textarea class="form-control" id="sinfil" rows="3"></textarea>
+			</div>
+  			<div class="w-100"></div><br>
+  			<div class="buttons col-md-5">
+	    		<button type="button" class="btn btn-primary" onclick="salvarFilme()">Salvar</button>
+    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroProduto').reset();">Adicionar</button>
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilme">Pesquisar</button>	
+				<button type="button" class="btn btn-danger" onclick="excluirProdutoBotao()">Excluir</button>	
+  			</div>
+  		</form>
+	</div>
+  	
+  	<div class="modal" id="modalPesquisarFilme"" tabindex="-1" aria-labelledby="Pesquisar Filmes" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de
-						usuários:</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Fechar"></button>
+					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Filmes:</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
 				</div>
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="nomeBusca" class="col-form-label">Informe o
-								nome:</label> <input type="text" class="form-control" id="nomeBusca">
+							<label for="nomeFilmeBusca" class="col-form-label">Informe o nome:</label> 
+							<input type="text" class="form-control" id="nomeFilmeBusca">
 						</div>
-						<button type="button" class="btn btn-success"
-							onclick="pesquisarUsuario()">Buscar</button>
+						<button type="button" class="btn btn-success" onclick="buscarFilmePorNome()">Buscar</button>
 					</form>
-
 				</div>
-
-				<div style="height: 300px; overflow: auto;">
+				<div style="height:300px; overflow:auto;">
 					<table class="table table-striped" id="tabelaresultados">
 						<thead>
 							<tr>
 								<th scope="col">ID</th>
 								<th scope="col">Nome</th>
-								<th scope="col">Editar</th>
-								<th scope="col">Excluir</th>
+								<th scope="col">Classificação Indicativa</th>
+								<th scope="col">Dub/Leg</th>
+								<th scope="col">Mês de exibição</th>
 							</tr>
 						</thead>
 						<tbody>
-
 						</tbody>
 					</table>
 				</div>
-
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
-		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-		crossorigin="anonymous"></script>
-
+	
+	<div class="modal" id="modalPesquisarPrincipioAtivo" tabindex="-1" aria-labelledby="Pesquisar Princípio Ativo" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Princípio Ativo:</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="mb-3">
+							<label for="nomePrincipioAtivoBusca" class="col-form-label">Informe o nome/descrição:</label> 
+							<input type="text" class="form-control" id="nomePrincipioAtivoBusca">
+						</div>
+						<button type="button" class="btn btn-success" onclick="buscarPrincipioAtivoPorNome()">Buscar</button>
+					</form>
+				</div>
+				<div style="height:300px; overflow:auto;">
+					<table class="table table-striped" id="tabelaresultados">
+						<thead>
+							<tr>
+								<th scope="col">Cód</th>
+								<th scope="col">Descrição</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script
+  		src="https://code.jquery.com/jquery-3.6.1.min.js"
+  		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  		crossorigin="anonymous">
+	</script>
+  
 	<!-- Option 1: Bootstrap Bundle with Popper -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-
-	<script type="text/javascript">
-		function salvarUsuario() {
-			var id = $("#id").val();
-			var nome = $("#nome").val();
-			var idade = $("#idade").val();
-
-			if (nome == "") {
-				alert("Informe o nome! ");
-				$("#nome").focus();
-				return;
-			} else {
-				$.ajax({
-					method : "POST",
-					url : "salvar",
-					data : JSON.stringify({
-						id : id,
-						nome : nome,
-						idade : idade
-					}),
-					contentType : "application/json; charset=utf-8",
-					success : function(response) {
-						$("#id").val(response.id);
-						alert("Salvo com sucesso!");
-					}
-				}).fail(function(xhr, status, errorThrown) {
-					alert("Erro ao salvar: " + xhr.responseText);
-				});
-			}
-		}
+		crossorigin="anonymous">
+	</script>
 		
-		function pesquisarUsuario(){
-			var nomeB = $("#nomeBusca").val();
-			if (nomeB !=null && nomeB.trim()!=''){
+	<script type="text/javascript">
+		function salvarFilme(){
+			var idfilme = $("#idfilme").val();
+			var nome = $("#nome").val();
+			var claind = $("#claind").val();
+			var mesexi = $("#mesexi").val();
+			var dubleg = $("#dubleg").val();
+			var sinfil = $("#sinfil").val();
+			
+			if(nome == ""){
+				alert("Informe o nome do filme!");
+				$("#idfilme").focus();
+				return;
+			}
+			if(claind <= 0){
+				alert("Preencha a classificação indicativa!");
+				$("#claind").focus();
+				return;	
+			}
+			if(sinfil.length > 255){
+				alert("Sinopse muito grande! Máximo de 255 caracteres!");
+				$("#sinfil").focus();
+				return;	
+			}
+				
+					
+			$.ajax({
+				method : "POST",
+				url : "salvarJSONFilme",
+				data : JSON.stringify({idfilme: idfilme, nome: nome, claind: claind, mesexi: mesexi, dubleg: dubleg, sinfil: sinfil}),
+				contentType : "application/json; charset=utf-8",
+				success : function(response){
+					$("#idfilme").val(response.cod);
+					alert("Produto salvo com sucesso!");
+				}
+			}).fail(function (xhr, status, errorThrown){
+				alert("Erro ao salvar o produto!");
+			});	
+		}	
+	
+// 	Função buscarFilmePorNome
+
+		function buscarFilmePorNome(){
+			var nomeFilmeBusca = $("#nomeFilmeBusca").val();
+			if (nomeFilmeBusca != null && nomeFilmeBusca.trim()!= ''){
 				$.ajax({ 
 					method : "GET", 
-					url : "buscarpornome", 
-					data : "nome=" + nomeB,
+					url : "buscarFilmeNome", 
+					data : "nome=" + nomeFilmeBusca,
 					success : 
 					function(response){
 						$("#tabelaresultados > tbody > tr").remove();
 						for (var i = 0; i < response.length; i++){
-							$('#tabelaresultados > tbody').append('<tr id="'+response[i].id+'"><td>' +
-							response[i].id + '</td><td>' + 
-							response[i].nome +'</td><td> <button type="button" onclick="colocarEmEdicao('+
-							response[i].id+')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirUsuario('+response[i].id+')">x</button></td></tr>')					
+							$('#tabelaresultados > tbody').append('<tr idfilme="'+response[i].idfilme+'"><td>' + 
+									response[i].idfilme + '</td><td>' + 
+									response[i].nome + '</td><td>' +
+									response[i].claind + '</td><td>' +
+									response[i].dubleg + '</td><td>' +
+									response[i].mesexi +'</td><td> <button type="button" onclick="colocarFilmeEmEdicao('+response[i].idfilme +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirFilme('+response[i].idfilme +')">x</button></td></tr>')					
 						}
-
 					}
 				}).fail(function (xhr, status, errorThrown){ 
-					alert("Erro ao buscar usuário: " + xhr.responseText); 
+					alert("Erro ao buscar o filme!"); 					
 				}); 
-					
 			}		
 		}
-		
-		function colocarEmEdicao(id) {		  
+//	 	Função colocarFilmeEmEdicao
+
+		function colocarFilmeEmEdicao(idfilme) {		  
 			  $.ajax({
 					method : "GET",
-					url : "buscaruserid",
-					data : "iduser=" + id ,
+					url : "buscarFilmeId",
+					data : "idfilme=" + idfilme ,
 					success : function(response) {
-						$("#id").val(response.id);
+						$("#idfilme").val(response.idfilme);
 						$("#nome").val(response.nome);
-						$("#idade").val(response.idade);					
-						$('#modalPesquisarUser').modal('hide');			  
+						$("#claind").val(response.claind);
+						$("#dubleg").val(response.dubleg);
+						$("#mesexi").val(response.mesexi);
+						$("#sinopse").val(response.sinopse);
+						$('#modalPesquisarFilme').modal('hide');			  
 					}
+			  
+			  
 				}).fail(function(xhr, status, errorThrown) {
-					alert("Erro ao buscar usuario por id: " + xhr.responseText);
+					alert("Erro ao buscar produto por id!");
 				});		  
 		  }
-		
-		function excluirUsuario(id){		
-			if(confirm('Deseja realmente excluir?')) {		
+//	 	Função excluirFilme 
+
+		function excluirFilme(idfilme){		
+			if(confirm('Deseja realmente excluir o filme selecionado?')) {		
 			 $.ajax({
 				method : "DELETE",
-				url : "delete",
-				data : "iduser=" + id ,
+				url : "deletarFilmeID",
+				data : "idfilme=" + idfilme ,
 				success : function(response) {					
-					$('#'+ id).remove();
+					$('#'+ idfilme).remove();
 					alert(response);	  
 				}
 			}).fail(function(xhr, status, errorThrown) {
-				alert("Erro ao deletar usuario por id: " + xhr.responseText);
+				alert("Erro ao deletar o filme pelo código!");
 			});		 
-		}		
+			}		
 		}
 		
-		function excluirUsuarioBotao(){
-			var id = $('#id').val();		
-			if(id != null && id.trim() != ''){
-			 excluirUsuario(id);
-			 document.getElementById('formCadastroUser').reset();
+		function excluirProdutoBotao(){
+			var cod = $('#cod').val();		
+			if(cod != null && cod.trim() != ''){
+			 excluirProduto(cod);
+			 document.getElementById('formCadastroProduto').reset();
 			}
 		}
-
-
 		
+		function buscarPrincipioAtivoPorNome(){
+			var nomePrincipioAtivoBusca = $("#nomePrincipioAtivoBusca").val();
+			if (nomePrincipioAtivoBusca != null && nomePrincipioAtivoBusca.trim()!= ''){
+				$.ajax({ 
+					method : "GET", 
+					url : "buscarPrincipioAtivoPorNome", 
+					data : "descricao=" + nomePrincipioAtivoBusca,
+					success : 
+					function(response){
+						$("#tabelaresultados > tbody > tr").remove();
+						for (var i = 0; i < response.length; i++){
+							$('#tabelaresultados > tbody').append('<tr cod="'+response[i].cod+'"><td>' + 
+									response[i].cod + '</td><td>' + 													
+									response[i].descricao +'</td><td> <button type="button" onclick="selecionarPrincipioAtivoProduto('+response[i].cod +')"class="btn btn-primary">+</button></td></tr>')					
+						}
+					}
+				}).fail(function (xhr, status, errorThrown){ 
+					alert("Erro ao buscar o Principio Ativo!"); 					
+				}); 
+			}		
+		}
+		
+		function selecionarPrincipioAtivoProduto(cod) {		  
+			  $.ajax({
+					method : "GET",
+					url : "buscarPrincipioAtivoId",
+					data : "idPrinAtivo=" + cod ,
+					success : function(response) {
+						$("#pro_principioativo").val(response.cod);
+						$('#modalPesquisarPrincipioAtivo').modal('hide');			  
+					}
+				}).fail(function(xhr, status, errorThrown) {
+					alert("Erro ao buscar Princípio Ativo pelo código!");
+				});		  
+		  }
 	</script>
-
-
 </body>
 </html>

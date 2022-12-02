@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unoesc.springboot.datacine.model.Filme;
@@ -28,36 +31,28 @@ public class GreetingsController {
      * @return greeting text
      */
        
+	
+//	**************** END POINT TESTE *******************
+	
+	@RequestMapping(value = "/oi", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public String greetingText() {
+        return "Hello World! Começa aqui o projeto DataCine...";
+    }
+
+ 
+//   **************** FILME  *******************
+
+
+    @Autowired // injeção de dependência
+	private FilmeRepository filmeRepository;
     
-    @GetMapping(value="listatodos")	
+    @GetMapping(value="listarTodosFilmes")	
     @ResponseBody
      public ResponseEntity<List<Filme>>listaFilme(){
      	List<Filme> filme = filmeRepository.findAll();
      	return new ResponseEntity<List<Filme>>(filme, HttpStatus.OK) ;
      }
-    
-    @DeleteMapping(value = "delete")
-	@ResponseBody
-	public ResponseEntity<String> deletefilme(@RequestParam Long idfilme) {
-		filmeRepository.deleteById(idfilme);
-		return new ResponseEntity<String>("Filme excluido com sucesso", HttpStatus.OK);
-	}
-    
-    @GetMapping(value = "buscaruserid")
-	@ResponseBody
-	public ResponseEntity<Filme> buscarfilmeid(@RequestParam(name = "idfilme") Long idfilme){
-		Filme filme = filmeRepository.findById(idfilme).get();
-		return new ResponseEntity<Filme>(filme, HttpStatus.OK);
-	}
-    
-
-    /* 
-     ***********  FILME   ***********
-     */
-
-    @Autowired // injeção de dependência
-	private FilmeRepository filmeRepository;
- 
     	
 	@PostMapping(value = "salvarJSONFilme")
 	@ResponseBody
@@ -80,6 +75,14 @@ public class GreetingsController {
 		return new ResponseEntity<Filme>(filme, HttpStatus.OK);
 	}		
 	
+
+    @GetMapping(value = "buscarFilmeNome")
+	@ResponseBody
+	public ResponseEntity<List<Filme>>buscarFilmeNome(@RequestParam(name = "nome") String nome){
+		List<Filme> filme = filmeRepository.filmeByName(nome.trim().toUpperCase());
+		return new ResponseEntity<List<Filme>>(filme, HttpStatus.OK);
+	}	
+
 	
 }
 

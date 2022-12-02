@@ -26,14 +26,14 @@ public class Filme implements Serializable{
 	private int mesexi;
 	
 	@Column(name="dubleg", length=1 , nullable=false, columnDefinition = "char(1)")
-	private int dubleg;
-	
-	@Column(name="sinfil", length=255 , nullable=false, columnDefinition = "varchar(45)")
-	private int sinfil;
+	private char dubleg;
 	
 	@Column(name="claind", length=2 , nullable=false, columnDefinition = "integer")
 	private int claind;
-
+	
+	@Column(name="sinfil", length=255 , nullable=false, columnDefinition = "varchar(45)")
+	private String sinfil;
+	
 	public Long getIdfilme() {
 		return idfilme;
 	}
@@ -58,19 +58,19 @@ public class Filme implements Serializable{
 		this.mesexi = mesexi;
 	}
 
-	public int getDubleg() {
+	public char getDubleg() {
 		return dubleg;
 	}
 
-	public void setDubleg(int dubleg) {
+	public void setDubleg(char dubleg) {
 		this.dubleg = dubleg;
 	}
 
-	public int getSinfil() {
+	public String getSinfil() {
 		return sinfil;
 	}
 
-	public void setSinfil(int sinfil) {
+	public void setSinfil(String sinfil) {
 		this.sinfil = sinfil;
 	}
 
