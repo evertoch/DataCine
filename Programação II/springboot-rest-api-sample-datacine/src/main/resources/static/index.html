@@ -11,7 +11,7 @@
 	crossorigin="anonymous">
 
 	<link rel="icon" href="./images/iconPage.png">
-
+	
 	<title>DataCine - Gestão de Cinema</title>
 	
 	<style>
@@ -77,12 +77,12 @@
 	    		<button type="button" class="btn btn-primary" onclick="salvarFilme()">Salvar</button>
     			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroProduto').reset();">Adicionar</button>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilme">Pesquisar</button>	
-				<button type="button" class="btn btn-danger" onclick="excluirProdutoBotao()">Excluir</button>	
+				<button type="button" class="btn btn-danger" onclick="excluirFilmeBotao()">Excluir</button>	
   			</div>
   		</form>
 	</div>
   	
-  	<div class="modal" id="modalPesquisarFilme"" tabindex="-1" aria-labelledby="Pesquisar Filmes" aria-hidden="true">
+  	<div class="modal" id="modalPesquisarFilme" tabindex="-1" aria-labelledby="Pesquisar Filmes" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -120,41 +120,6 @@
 		</div>
 	</div>
 	
-	<div class="modal" id="modalPesquisarPrincipioAtivo" tabindex="-1" aria-labelledby="Pesquisar Princípio Ativo" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Princípio Ativo:</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="mb-3">
-							<label for="nomePrincipioAtivoBusca" class="col-form-label">Informe o nome/descrição:</label> 
-							<input type="text" class="form-control" id="nomePrincipioAtivoBusca">
-						</div>
-						<button type="button" class="btn btn-success" onclick="buscarPrincipioAtivoPorNome()">Buscar</button>
-					</form>
-				</div>
-				<div style="height:300px; overflow:auto;">
-					<table class="table table-striped" id="tabelaresultados">
-						<thead>
-							<tr>
-								<th scope="col">Cód</th>
-								<th scope="col">Descrição</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
 	<script
   		src="https://code.jquery.com/jquery-3.6.1.min.js"
   		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -169,6 +134,9 @@
 	</script>
 		
 	<script type="text/javascript">
+
+// Função salvarFilme
+
 		function salvarFilme(){
 			var idfilme = $("#idfilme").val();
 			var nome = $("#nome").val();
@@ -256,6 +224,7 @@
 					alert("Erro ao buscar produto por id!");
 				});		  
 		  }
+		  
 //	 	Função excluirFilme 
 
 		function excluirFilme(idfilme){		
@@ -273,50 +242,17 @@
 			});		 
 			}		
 		}
-		
-		function excluirProdutoBotao(){
-			var cod = $('#cod').val();		
-			if(cod != null && cod.trim() != ''){
-			 excluirProduto(cod);
+
+//	 	Função excluirFilmeBotao 
+
+		function excluirFilmeBotao(){
+			var idfilme = $('#idfilme').val();		
+			if(idfilme != null && idfilme.trim() != ''){
+			 excluirFilme(idfilme);
 			 document.getElementById('formCadastroProduto').reset();
 			}
 		}
 		
-		function buscarPrincipioAtivoPorNome(){
-			var nomePrincipioAtivoBusca = $("#nomePrincipioAtivoBusca").val();
-			if (nomePrincipioAtivoBusca != null && nomePrincipioAtivoBusca.trim()!= ''){
-				$.ajax({ 
-					method : "GET", 
-					url : "buscarPrincipioAtivoPorNome", 
-					data : "descricao=" + nomePrincipioAtivoBusca,
-					success : 
-					function(response){
-						$("#tabelaresultados > tbody > tr").remove();
-						for (var i = 0; i < response.length; i++){
-							$('#tabelaresultados > tbody').append('<tr cod="'+response[i].cod+'"><td>' + 
-									response[i].cod + '</td><td>' + 													
-									response[i].descricao +'</td><td> <button type="button" onclick="selecionarPrincipioAtivoProduto('+response[i].cod +')"class="btn btn-primary">+</button></td></tr>')					
-						}
-					}
-				}).fail(function (xhr, status, errorThrown){ 
-					alert("Erro ao buscar o Principio Ativo!"); 					
-				}); 
-			}		
-		}
-		
-		function selecionarPrincipioAtivoProduto(cod) {		  
-			  $.ajax({
-					method : "GET",
-					url : "buscarPrincipioAtivoId",
-					data : "idPrinAtivo=" + cod ,
-					success : function(response) {
-						$("#pro_principioativo").val(response.cod);
-						$('#modalPesquisarPrincipioAtivo').modal('hide');			  
-					}
-				}).fail(function(xhr, status, errorThrown) {
-					alert("Erro ao buscar Princípio Ativo pelo código!");
-				});		  
-		  }
 	</script>
 </body>
 </html>
