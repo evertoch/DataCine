@@ -9,11 +9,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @SequenceGenerator(name = "seq_filme", sequenceName = "seq_filme", allocationSize = 1, initialValue = 1)
+@JsonIgnoreProperties
 public class Filme implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	
+	public Filme() {}
+	
+	public Filme(String idfilme) {
+		this.idfilme = Long.parseLong(idfilme);
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idfilme", length=10 , nullable=false, columnDefinition = "integer")

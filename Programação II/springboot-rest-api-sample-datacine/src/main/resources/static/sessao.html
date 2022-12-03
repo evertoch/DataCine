@@ -25,7 +25,7 @@
 <body style= background-color:#e6e6e6;>
 
 
-<!--  Formulário Cadastro de sessaos; -->
+<!--  Formulário Cadastro de Sessões; -->
 	
 	<div class="formCadastroSessoes row justify-content-center">
 		<h2 class="row col-md-3">Cadastro de Sessões</h2><br>
@@ -33,21 +33,21 @@
 		<form action="" id="formCadastroSessoes" class="row justify-content-center">
 			<div class="col-md-1">
 	    		<label for="idsessao" class="form-label">ID:</label>
-    			<input type="text" class="form-control" id="idsessao" readonly="readonly">
+    			<input type="number" class="form-control" id="idsessao" readonly="readonly">
 			</div>
   			<div class="col-1">
 		    	<label for="idfilme" class="form-label">Filme:</label>
-    			<input type="text" class="form-control" id="idfilme" placeholder="ID do Filme" required = "required" readonly="readonly">
+    			<input type="number" class="form-control" id="idfilme" placeholder="ID do Filme" required = "required" readonly="readonly">
     			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilmes">Buscar</button>
   			</div>
 			<div class="col-1">
 		    	<label for="idsala" class="form-label">Sala:</label>
-    			<input type="text" class="form-control" id="idsala" placeholder="ID da Sala" required = "required" readonly="readonly">
+    			<input type="number" class="form-control" id="idsala" placeholder="ID da Sala" required = "required" readonly="readonly">
     			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarSalas">Buscar</button>
   			</div>
 			<div class="col-md-1">
-				<label for="mesexi" class="form-label">Horário:</label> <select
-					id="mesexi" class="form-select" required="required">
+				<label for="horses" class="form-label">Horário:</label> <select
+					id="horses" class="form-select" required="required">
 					<option value="16:00" selected>16:00</option>
 					<option value="19:00">19:00</option>
 					<option value="21:30">21:30</option>		
@@ -63,21 +63,23 @@
   		</form>
 	</div>
 
-  	
-  	<div class="modal" id="modalPesquisarSessao" tabindex="-1" aria-labelledby="Pesquisar Sessaos" aria-hidden="true">
+<!-- Fim do Formulário Cadastro de sessaos; -->
+
+<!--  Tela do botão Pesquisar; -->  	
+  	<div class="modal" id="modalPesquisarSessao" tabindex="-1" aria-labelledby="Pesquisar Sessoes" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Sessões:</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Sessão:</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
 				</div>
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="nomeSessaoBusca" class="col-form-label">Informe o nome:</label> 
-							<input type="text" class="form-control" id="nomeSessaoBusca">
+							<label for="idSessaoBusca" class="col-form-label">Informe o ID:</label> 
+							<input type="number" class="form-control" id="idSessaoBusca">
 						</div>
-						<button type="button" class="btn btn-success" onclick="buscarSessaoPorNome()">Buscar</button>
+						<button type="button" class="btn btn-success" onclick="buscarSessaoId()">Buscar</button>
 					</form>
 				</div>
 				<div style="height:300px; overflow:auto;">
@@ -85,8 +87,9 @@
 						<thead>
 							<tr>
 								<th scope="col">ID</th>
-								<th scope="col">Nome</th>
-								<th scope="col">Capacidade</th>
+								<th scope="col">Filme</th>
+								<th scope="col">Sala</th>
+								<th scope="col">Horário</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -99,7 +102,10 @@
 			</div>
 		</div>
 	</div>
+<!--  Fim da Tela do botão Pesquisar; -->  
+
 	
+<!--  Tela do botão "Buscar" em ID do Filme; -->  		
 		<div class="modal" id="modalPesquisarFilmes" tabindex="-1" aria-labelledby="Pesquisar Filmes" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -134,7 +140,11 @@
 			</div>
 		</div>
 	</div>
-	
+
+<!--  Fim da tela do botão "Buscar" em ID do Filme; -->
+
+
+<!--  Tela do botão "Buscar" em ID da sala; -->
 			<div class="modal" id="modalPesquisarSalas" tabindex="-1" aria-labelledby="Pesquisar Salas" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -170,6 +180,8 @@
 		</div>
 	</div>
 	
+<!-- Fim da tela do botão "Buscar" em ID da sala; -->
+	
 	<script
   		src="https://code.jquery.com/jquery-3.6.1.min.js"
   		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -185,6 +197,9 @@
 		
 	<script type="text/javascript">
 
+	
+	// ------------------ SESSÃO ------------------
+	
 // Função salvarSessao
 
 		function salvarSessao(){
@@ -203,7 +218,6 @@
 				$("#idfilme").focus();
 				return;
 			}
-			
 				$.ajax({
 					method : "POST",
 					url : "salvarSessao",
@@ -217,31 +231,33 @@
 					alert("Erro ao salvar a sessão!");
 				});	
 			}
-			
-//	 	Função buscarSessaoPorNome
+		
+//	 	Função buscarSessaoId
 
-		function buscarSessaoPorNome(){
-			var nomeSessaoBusca = $("#nomeSessaoBusca").val();
-			if (nomeSessaoBusca != null && nomeSessaoBusca.trim()!= ''){
+		function buscarSessaoId(){
+			var idSessaoBusca = $("#idSessaoBusca").val();
+// 			if (idSessaoBusca != null && idSessaoBusca.trim()!= ''){
 				$.ajax({ 
 					method : "GET", 
-					url : "buscarSessaoNome", 
-					data : "nome=" + nomeSessaoBusca,
+					url : "buscarSessaoId",
+					data : "idsessao" + idSessaoBusca,
 					success : 
 					function(response){
 						$("#tabelaresultados > tbody > tr").remove();
 						for (var i = 0; i < response.length; i++){
 							$('#tabelaresultados > tbody').append('<tr idsessao="'+response[i].idsessao+'"><td>' + 
 									response[i].idsessao + '</td><td>' + 
-									response[i].nome + '</td><td>' +
-									response[i].capsal + '</td><td> <button type="button" onclick="colocarSessaoEmEdicao('+response[i].idsessao +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirSessao('+response[i].idsessao +')">x</button></td></tr>')					
+									response[i].idfilme + '</td><td>' +
+									response[i].idsala + '</td><td>' +
+									response[i].horses + '</td><td> <button type="button" onclick="colocarSessaoEmEdicao('+response[i].idsessao +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirSessao('+response[i].idsessao +')">x</button></td></tr>')					
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
 					alert("Erro ao buscar a sessão!"); 					
 				}); 
-			}		
-		}
+// 			}
+	}
+		
 		
 //      Função colocarSessaoEmEdicao
 		function colocarSessaoEmEdicao(idsessao) {		  
@@ -295,7 +311,7 @@
 // 			Função buscarFilmePorNome
 		function buscarFilmePorNome(){
 			var nomeFilmeBusca = $("#nomeFilmeBusca").val();
-			if (nomeFilmeBusca != null && nomeFilmeBusca.trim()!= ''){
+// 			if (nomeFilmeBusca != null && nomeFilmeBusca.trim()!= ''){
 				$.ajax({ 
 					method : "GET", 
 					url : "buscarFilmeNome", 
@@ -306,19 +322,19 @@
 						for (var i = 0; i < response.length; i++){
 							$('#tabelaresultados > tbody').append('<tr idfilme="'+response[i].idfilme+'"><td>' + 
 									response[i].idfilme + '</td><td>' + 
-									response[i].nome +'</td><td> <button type="button" onclick="colocarFilmeEmEdicao('+response[i].idfilme +')"class="btn btn-primary" data-bs-dismiss="modal">+</button></td></tr>')
+									response[i].nome +'</td><td> <button type="button" onclick="preencherFilmeFormulario('+response[i].idfilme +')"class="btn btn-primary" data-bs-dismiss="modal">+</button></td></tr>')
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
 					alert("Erro ao buscar o filme!"); 					
 				}); 
-			}
+// 			}
 
 		}
 
-//	 	Função colocarFilmeEmEdicao
+//	 	Função preencherFilmeFormulario
 
-		function colocarFilmeEmEdicao(idfilme) {
+		function preencherFilmeFormulario(idfilme) {
 			$.ajax({
 				method : "GET",
 				url : "buscarFilmeId",
@@ -338,7 +354,7 @@
 // 			Função buscarSalaPorNome
 		function buscarSalaPorNome(){
 			var nomeSalaBusca = $("#nomeSalaBusca").val();
-			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){
+// 			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){
 				$.ajax({ 
 					method : "GET", 
 					url : "buscarSalaNome", 
@@ -349,18 +365,18 @@
 						for (var i = 0; i < response.length; i++){
 							$('#tabelaresultados > tbody').append('<tr idsala="'+response[i].idsala+'"><td>' + 
 									response[i].idsala + '</td><td>' + 
-									response[i].nome +'</td><td> <button type="button" onclick="colocarSalaEmEdicao('+response[i].idsala +')"class="btn btn-primary" data-bs-dismiss="modal">+</button></td></tr>')					
+									response[i].nome +'</td><td> <button type="button" onclick="preencherSalaFormulario('+response[i].idsala +')"class="btn btn-primary" data-bs-dismiss="modal">+</button></td></tr>')					
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
 					alert("Erro ao buscar a sala!"); 					
 				}); 
-			}		
+// 			}		
 		}
 
-//      Função colocarSalaEmEdicao
+//      Função preencherSalaFormulario
 
-			function colocarSalaEmEdicao(idsala) {		  
+			function preencherSalaFormulario(idsala) {		  
 			  $.ajax({
 					method : "GET",
 					url : "buscarSalaId",

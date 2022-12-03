@@ -140,7 +140,7 @@
 
 		function buscarSalaPorNome(){
 			var nomeSalaBusca = $("#nomeSalaBusca").val();
-			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){
+// 			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){
 				$.ajax({ 
 					method : "GET", 
 					url : "buscarSalaNome", 
@@ -158,7 +158,7 @@
 				}).fail(function (xhr, status, errorThrown){ 
 					alert("Erro ao buscar a sala!"); 					
 				}); 
-			}		
+// 			}		
 		}
 		
 //      Função colocarSalaEmEdicao

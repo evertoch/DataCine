@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+	rel="stylesheet" 
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+
+	<link rel="icon" type="image/png" href="assets/img/favicon.png"/>
+	<title>DataCine - Gestão de Cinema</title>
+	
+	<style>
+		:root{
+			--bs-body-bg: #DCDCDC;
+		}			
+	</style>
+	
+</head>
+
+<!-- Fonte do Google -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Estilos para o layout: vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- Template: Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+
+<body style= background-color:#e6e6e6;>
+
+
+<!--  Formulário Cadastro de filmes; -->
+	
+	<div class="formCadastroFilmes row justify-content-center">
+		<h2 class="col-md-3">Cadastro de Filmes</h2><br>
+		<div class="w-100"></div>		
+		<form action="" id="formCadastroFilmes" class="row justify-content-center">
+			<div class="col-md-1">
+	    		<label for="idfilme" class="form-label">ID</label>
+    			<input type="text" class="form-control" id="idfilme" readonly="readonly">
+			</div>
+  			<div class="col-4">
+	    		<label for="nome" class="form-label">Nome:</label>
+    			<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required">
+			</div>
+  			<div class="w-100"></div>
+  			<div class="col-md-2">
+		    	<label for="claind" class="form-label">Classificação Indicativa:</label>
+    			<input type="number" class="form-control" id="claind" placeholder="Idade" required = "required">
+  			</div>
+  			<div class="col-md-1">
+	    		<label for="dubleg" class="form-label">Dub/Leg:</label>
+    			<select id="dubleg" class="form-select" required = "required">
+	      			<option value="D">Dublado</option>
+      				<option value="L">Legendado</option>
+    			</select>
+  			</div>
+  			<div class="col-md-2">
+	    		<label for="mesexi" class="form-label">Mês de Exibição:</label>
+    			<select id="mesexi" class="form-select" required = "required">
+    				<option value="00" selected>Fora de Exibição</option>
+      				<option value="01" >Janeiro</option>
+      				<option value="02" >Fevereiro</option>
+      				<option value="03" >Março</option>
+      				<option value="04" >Abril</option>
+      				<option value="05" >Maio</option>
+      				<option value="06" >Junho</option>
+      				<option value="07" >Julho</option>
+      				<option value="08" >Agosto</option>
+      				<option value="09" >Setembro</option>
+      				<option value="10" >Outubro</option>
+      				<option value="11" >Novembro</option>
+      				<option value="12" >Dezembro</option>
+    			</select>
+  			</div>
+  			
+  			<div class="w-100"></div>
+  			<div class="col-md-5">
+  				<label for="sinfil" class="form-label">Sinopse:</label>
+  				<textarea class="form-control" id="sinfil" rows="3"></textarea>
+			</div>
+  			<div class="w-100"></div><br>
+  			<div class="buttons col-md-5">
+	    		<button type="button" class="btn btn-primary" onclick="salvarFilme()">Salvar</button>
+    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroFilmes').reset();">Limpar</button>
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilme">Pesquisar</button>	
+				<button type="button" class="btn btn-danger" onclick="excluirFilmeBotao()">Excluir</button>	
+  			</div>
+  		</form>
+	</div>
+  	
+  	<div class="modal" id="modalPesquisarFilme" tabindex="-1" aria-labelledby="Pesquisar Filmes" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Filmes:</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="mb-3">
+							<label for="nomeFilmeBusca" class="col-form-label">Informe o nome:</label> 
+							<input type="text" class="form-control" id="nomeFilmeBusca">
+						</div>
+						<button type="button" class="btn btn-success" onclick="buscarFilmePorNome()">Buscar</button>
+					</form>
+				</div>
+				<div style="height:300px; overflow:auto;">
+					<table class="table table-striped" id="tabelaresultados">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Classificação Indicativa</th>
+								<th scope="col">Dub/Leg</th>
+								<th scope="col">Mês de exibição</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script
+  		src="https://code.jquery.com/jquery-3.6.1.min.js"
+  		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  		crossorigin="anonymous">
+	</script>
+  
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous">
+	</script>
+		
+	<script type="text/javascript">
+
+// Função salvarFilme
+
+		function salvarFilme(){
+			var idfilme = $("#idfilme").val();
+			var nome = $("#nome").val();
+			var claind = $("#claind").val();
+			var mesexi = $("#mesexi").val();
+			var dubleg = $("#dubleg").val();
+			var sinfil = $("#sinfil").val();
+			
+			if(nome == ""){
+				alert("Informe o nome do filme!");
+				$("#nome").focus();
+				return;
+			}
+			if(claind <= 0){
+				alert("Preencha a classificação indicativa!");
+				$("#claind").focus();
+				return;	
+			}
+			if(sinfil.length > 255){
+				alert("Sinopse muito grande! Máximo de 255 caracteres!");
+				$("#sinfil").focus();
+				return;	
+			}
+				$.ajax({
+				method : "POST",
+				url : "salvarJSONFilme",
+				data : JSON.stringify({idfilme: idfilme, nome: nome, claind: claind, mesexi: mesexi, dubleg: dubleg, sinfil: sinfil}),
+				contentType : "application/json; charset=utf-8",
+				success : function(response){
+					$("#idfilme").val(response.cod);
+					alert("Filme salvo com sucesso!");
+				}
+			}).fail(function (xhr, status, errorThrown){
+				alert("Erro ao salvar o filme!");
+			});	
+		}	
+	
+// 	Função buscarFilmePorNome
+
+		function buscarFilmePorNome(){
+			var nomeFilmeBusca = $("#nomeFilmeBusca").val();
+// 			if (nomeFilmeBusca != null && nomeFilmeBusca.trim()!= ''){  -- CASO O CAMPO ESTEJA VAZIO, TRARÁ TODO OS FILMES CADASTRADOS
+				$.ajax({ 
+					method : "GET", 
+					url : "buscarFilmeNome", 
+					data : "nome=" + nomeFilmeBusca,
+					success : 
+					function(response){
+						$("#tabelaresultados > tbody > tr").remove();
+						for (var i = 0; i < response.length; i++){
+							$('#tabelaresultados > tbody').append('<tr idfilme="'+response[i].idfilme+'"><td>' + 
+									response[i].idfilme + '</td><td>' + 
+									response[i].nome + '</td><td>' +
+									response[i].claind + '</td><td>' +
+									response[i].dubleg + '</td><td>' +
+									response[i].mesexi +'</td><td> <button type="button" onclick="colocarFilmeEmEdicao('+response[i].idfilme +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirFilme('+response[i].idfilme +')">x</button></td></tr>')					
+						}
+					}
+				}).fail(function (xhr, status, errorThrown){ 
+					alert("Erro ao buscar o filme!"); 					
+				}); 
+// 			}		
+		}
+//	 	Função colocarFilmeEmEdicao
+
+		function colocarFilmeEmEdicao(idfilme) {		  
+			  $.ajax({
+					method : "GET",
+					url : "buscarFilmeId",
+					data : "idfilme=" + idfilme ,
+					success : function(response) {
+						$("#idfilme").val(response.idfilme);
+						$("#nome").val(response.nome);
+						$("#claind").val(response.claind);
+						$("#dubleg").val(response.dubleg);
+						$("#mesexi").val(response.mesexi);
+						$("#sinopse").val(response.sinopse);
+						$('#modalPesquisarFilme').modal('hide');			  
+					}
+			  
+			  
+				}).fail(function(xhr, status, errorThrown) {
+					alert("Erro ao buscar filme por id!");
+				});		  
+		  }
+		  
+//	 	Função excluirFilme 
+
+		function excluirFilme(idfilme){		
+			if(confirm('Deseja realmente excluir o filme selecionado?')) {		
+			 $.ajax({
+				method : "DELETE",
+				url : "deletarFilmeId",
+				data : "idfilme=" + idfilme ,
+				success : function(response) {					
+					$('#'+ idfilme).remove();
+					alert(response);	  
+				}
+			}).fail(function(xhr, status, errorThrown) {
+				alert("Erro ao deletar o filme pelo código!");
+			});		 
+			}		
+		}
+
+//	 	Função excluirFilmeBotao 
+
+		function excluirFilmeBotao(){
+			var idfilme = $('#idfilme').val();		
+			if(idfilme != null && idfilme.trim() != ''){
+			 excluirFilme(idfilme);
+			 document.getElementById('formCadastroFilmes').reset();
+			}
+		}
+		
+	</script>
+</body>
+</html>

@@ -16,6 +16,13 @@ import javax.persistence.SequenceGenerator;
 public class Sessao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+
+	public Sessao() {}
+	
+	public Sessao(String idsessao) {
+		this.idsessao = Long.parseLong(idsessao);
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idsessao", length=10 , nullable=false, columnDefinition = "integer")
@@ -32,12 +39,21 @@ public class Sessao implements Serializable{
 	@JoinColumn(name="idsala", referencedColumnName = "idsala", nullable = false, columnDefinition = "integer")
 	private Sala idsala;
 
+
 	public Long getIdsessao() {
 		return idsessao;
 	}
 
 	public void setIdsessao(Long idsessao) {
 		this.idsessao = idsessao;
+	}
+
+	public String getHorses() {
+		return horses;
+	}
+
+	public void setHorses(String horses) {
+		this.horses = horses;
 	}
 
 	public Filme getIdfilme() {
@@ -59,6 +75,8 @@ public class Sessao implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	
 
 	
 }

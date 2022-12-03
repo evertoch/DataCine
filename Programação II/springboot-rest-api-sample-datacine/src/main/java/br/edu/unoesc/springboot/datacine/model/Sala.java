@@ -14,6 +14,12 @@ import javax.persistence.SequenceGenerator;
 public class Sala implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	public Sala() {}
+	
+	public Sala(String idsala) {
+		this.idsala = Long.parseLong(idsala);
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idsala", length=2 , nullable=false, columnDefinition = "integer")

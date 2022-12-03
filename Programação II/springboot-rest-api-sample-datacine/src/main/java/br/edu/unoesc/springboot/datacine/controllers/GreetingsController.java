@@ -123,11 +123,12 @@ public class GreetingsController {
     
     @Autowired // injeção de dependência
    	private SessaoRepository sessaoRepository;
+    
 	
-	@GetMapping(value = "buscarSessaoId")
+    @GetMapping(value = "buscarSessaoId")
 	@ResponseBody
 	public ResponseEntity<Sessao> buscarSessaoId(@RequestParam(name = "idsessao") Long idsessao){
-		Sessao sessao= sessaoRepository.findById(idsessao).get();
+		Sessao sessao = sessaoRepository.findById(idsessao).get();
 		return new ResponseEntity<Sessao>(sessao, HttpStatus.OK);
 	}
 	
@@ -142,7 +143,7 @@ public class GreetingsController {
 	@DeleteMapping(value = "deletarSessaoId")
 	@ResponseBody
 	public ResponseEntity<String> deletarSessaoId(@RequestParam Long idsessao) {
-		salaRepository.deleteById(idsessao);
+		sessaoRepository.deleteById(idsessao);
 		return new ResponseEntity<String>("Sessão excluída com sucesso!", HttpStatus.OK);
 	}
 
