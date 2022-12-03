@@ -34,6 +34,7 @@ public class Filme implements Serializable{
 	@Column(name="sinfil", length=255 , nullable=false, columnDefinition = "varchar(45)")
 	private String sinfil;
 	
+	
 	public Long getIdfilme() {
 		return idfilme;
 	}

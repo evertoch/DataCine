@@ -21,12 +21,15 @@ public class Sessao implements Serializable{
 	@Column(name="idsessao", length=10 , nullable=false, columnDefinition = "integer")
 	private Long idsessao;
 	
+	@Column(name="horses", length=8, nullable=false, columnDefinition = "varchar(45)")
+	private String horses;	
+	
 	@ManyToOne
-	@JoinColumn(name="idfilme", referencedColumnName = "idfilme", nullable = false)
+	@JoinColumn(name="idfilme", referencedColumnName = "idfilme", nullable = false, columnDefinition = "integer")
 	private Filme idfilme;
 	
 	@ManyToOne
-	@JoinColumn(name="idsala", referencedColumnName = "idsala", nullable = false)
+	@JoinColumn(name="idsala", referencedColumnName = "idsala", nullable = false, columnDefinition = "integer")
 	private Sala idsala;
 
 	public Long getIdsessao() {

@@ -65,9 +65,9 @@ public class GreetingsController {
 		return new ResponseEntity<Filme>(fil, HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping(value = "deletarFilmeID")
+	@DeleteMapping(value = "deletarFilmeId")
 	@ResponseBody
-	public ResponseEntity<String> deletarFilmeID(@RequestParam Long idfilme) {
+	public ResponseEntity<String> deletarFilmeId(@RequestParam Long idfilme) {
 		filmeRepository.deleteById(idfilme);
 		return new ResponseEntity<String>("Filme excluído com sucesso!", HttpStatus.OK);
 	}
@@ -112,9 +112,9 @@ public class GreetingsController {
 		return new ResponseEntity<List<Sala>>(sala, HttpStatus.OK);
     }
     
-	@DeleteMapping(value = "deletarSalaID")
+	@DeleteMapping(value = "deletarSalaId")
 	@ResponseBody
-	public ResponseEntity<String> deletarSalaID(@RequestParam Long idsala) {
+	public ResponseEntity<String> deletarSalaId(@RequestParam Long idsala) {
 		salaRepository.deleteById(idsala);
 		return new ResponseEntity<String>("Sala excluída com sucesso!", HttpStatus.OK);
 	}
@@ -131,6 +131,20 @@ public class GreetingsController {
 		return new ResponseEntity<Sessao>(sessao, HttpStatus.OK);
 	}
 	
+	@PostMapping(value = "salvarSessao")
+	@ResponseBody
+	public ResponseEntity<Sessao> salvarSessao(@RequestBody Sessao sessao) {
+		Sessao sessa= sessaoRepository.save(sessao);
+		return new ResponseEntity<Sessao>(sessa, HttpStatus.CREATED);
+	
+	}
+	
+	@DeleteMapping(value = "deletarSessaoId")
+	@ResponseBody
+	public ResponseEntity<String> deletarSessaoId(@RequestParam Long idsessao) {
+		salaRepository.deleteById(idsessao);
+		return new ResponseEntity<String>("Sessão excluída com sucesso!", HttpStatus.OK);
+	}
 
     
 }

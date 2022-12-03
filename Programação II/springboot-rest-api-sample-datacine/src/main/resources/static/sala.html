@@ -46,7 +46,7 @@
 			<div class="w-100"></div><br>
   			<div class="buttons col-md-5">
 	    		<button type="button" class="btn btn-primary" onclick="salvarSala()">Salvar</button>
-    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroSalas').reset();">Adicionar</button>
+    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroSalas').reset();">Limpar</button>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarSala">Pesquisar</button>	
 				<button type="button" class="btn btn-danger" onclick="excluirSalaBotao()">Excluir</button>	
   			</div>
@@ -176,7 +176,7 @@
 			  
 			  
 				}).fail(function(xhr, status, errorThrown) {
-					alert("Erro ao buscar produto por id!");
+					alert("Erro ao buscar sala por id!");
 				});		  
 		  }
 		  
@@ -186,7 +186,7 @@
 			if(confirm('Deseja realmente excluir a sala selecionada?')) {		
 			 $.ajax({
 				method : "DELETE",
-				url : "deletarSalaID",
+				url : "deletarSalaId",
 				data : "idsala=" + idsala ,
 				success : function(response) {					
 					$('#'+ idsala).remove();

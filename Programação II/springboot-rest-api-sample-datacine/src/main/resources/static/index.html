@@ -89,7 +89,7 @@
   			<div class="w-100"></div><br>
   			<div class="buttons col-md-5">
 	    		<button type="button" class="btn btn-primary" onclick="salvarFilme()">Salvar</button>
-    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroFilmes').reset();">Adicionar</button>
+    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroFilmes').reset();">Limpar</button>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilme">Pesquisar</button>	
 				<button type="button" class="btn btn-danger" onclick="excluirFilmeBotao()">Excluir</button>	
   			</div>
@@ -181,10 +181,10 @@
 				contentType : "application/json; charset=utf-8",
 				success : function(response){
 					$("#idfilme").val(response.cod);
-					alert("Produto salvo com sucesso!");
+					alert("Filme salvo com sucesso!");
 				}
 			}).fail(function (xhr, status, errorThrown){
-				alert("Erro ao salvar o produto!");
+				alert("Erro ao salvar o filme!");
 			});	
 		}	
 	
@@ -233,7 +233,7 @@
 			  
 			  
 				}).fail(function(xhr, status, errorThrown) {
-					alert("Erro ao buscar produto por id!");
+					alert("Erro ao buscar filme por id!");
 				});		  
 		  }
 		  
@@ -243,7 +243,7 @@
 			if(confirm('Deseja realmente excluir o filme selecionado?')) {		
 			 $.ajax({
 				method : "DELETE",
-				url : "deletarFilmeID",
+				url : "deletarFilmeId",
 				data : "idfilme=" + idfilme ,
 				success : function(response) {					
 					$('#'+ idfilme).remove();
