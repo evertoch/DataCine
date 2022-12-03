@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unoesc.springboot.datacine.model.Filme;
+import br.edu.unoesc.springboot.datacine.model.Sala;
+import br.edu.unoesc.springboot.datacine.model.Sessao;
 import br.edu.unoesc.springboot.datacine.repository.FilmeRepository;
+import br.edu.unoesc.springboot.datacine.repository.SalaRepository;
+import br.edu.unoesc.springboot.datacine.repository.SessaoRepository;
 
 /**
  *
@@ -82,6 +86,52 @@ public class GreetingsController {
 		return new ResponseEntity<List<Filme>>(filme, HttpStatus.OK);
 	}	
 
+//  **************** SALA  *******************
+    
+    @Autowired // injeção de dependência
+   	private SalaRepository salaRepository;
+    
+	@GetMapping(value = "buscarSalaId")
+	@ResponseBody
+	public ResponseEntity<Sala> buscarSalaId(@RequestParam(name = "idsala") Long idsala){
+		Sala sala = salaRepository.findById(idsala).get();
+		return new ResponseEntity<Sala>(sala, HttpStatus.OK);
+	}
 	
+	@PostMapping(value = "salvarSala")
+	@ResponseBody
+	public ResponseEntity<Sala> salvarSala(@RequestBody Sala sala) {
+		Sala sal= salaRepository.save(sala);
+		return new ResponseEntity<Sala>(sal, HttpStatus.CREATED);
+	}
+	
+    @GetMapping(value = "buscarSalaNome")
+	@ResponseBody
+	public ResponseEntity<List<Sala>>buscarSalaNome(@RequestParam(name = "nome") String nome){
+		List<Sala> sala = salaRepository.salaByName(nome.trim().toUpperCase());
+		return new ResponseEntity<List<Sala>>(sala, HttpStatus.OK);
+    }
+    
+	@DeleteMapping(value = "deletarSalaID")
+	@ResponseBody
+	public ResponseEntity<String> deletarSalaID(@RequestParam Long idsala) {
+		salaRepository.deleteById(idsala);
+		return new ResponseEntity<String>("Sala excluída com sucesso!", HttpStatus.OK);
+	}
+    
+//  **************** SESSAO  *******************
+    
+    @Autowired // injeção de dependência
+   	private SessaoRepository sessaoRepository;
+	
+	@GetMapping(value = "buscarSessaoId")
+	@ResponseBody
+	public ResponseEntity<Sessao> buscarSessaoId(@RequestParam(name = "idsessao") Long idsessao){
+		Sessao sessao= sessaoRepository.findById(idsessao).get();
+		return new ResponseEntity<Sessao>(sessao, HttpStatus.OK);
+	}
+	
+
+    
 }
 

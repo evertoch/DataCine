@@ -10,8 +10,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 
-	<link rel="icon" href="./images/iconPage.png">
-	
+	<link rel="icon" type="image/png" href="assets/img/favicon.png"/>
 	<title>DataCine - Gestão de Cinema</title>
 	
 	<style>
@@ -32,17 +31,17 @@
 
   <!-- Template: Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  
-</head>
 
-<body>
+
+<body style= background-color:#e6e6e6;>
+
 
 <!--  Formulário Cadastro de filmes; -->
 	
-	<div class="formCadastroProduto row justify-content-center">
+	<div class="formCadastroFilmes row justify-content-center">
 		<h2 class="col-md-3">Cadastro de Filmes</h2><br>
 		<div class="w-100"></div>		
-		<form action="" id="formCadastroProduto" class="row justify-content-center">
+		<form action="" id="formCadastroFilmes" class="row justify-content-center">
 			<div class="col-md-1">
 	    		<label for="idfilme" class="form-label">ID</label>
     			<input type="text" class="form-control" id="idfilme" readonly="readonly">
@@ -90,7 +89,7 @@
   			<div class="w-100"></div><br>
   			<div class="buttons col-md-5">
 	    		<button type="button" class="btn btn-primary" onclick="salvarFilme()">Salvar</button>
-    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroProduto').reset();">Adicionar</button>
+    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroFilmes').reset();">Adicionar</button>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilme">Pesquisar</button>	
 				<button type="button" class="btn btn-danger" onclick="excluirFilmeBotao()">Excluir</button>	
   			</div>
@@ -162,7 +161,7 @@
 			
 			if(nome == ""){
 				alert("Informe o nome do filme!");
-				$("#idfilme").focus();
+				$("#nome").focus();
 				return;
 			}
 			if(claind <= 0){
@@ -175,9 +174,7 @@
 				$("#sinfil").focus();
 				return;	
 			}
-				
-					
-			$.ajax({
+				$.ajax({
 				method : "POST",
 				url : "salvarJSONFilme",
 				data : JSON.stringify({idfilme: idfilme, nome: nome, claind: claind, mesexi: mesexi, dubleg: dubleg, sinfil: sinfil}),
@@ -264,7 +261,7 @@
 			var idfilme = $('#idfilme').val();		
 			if(idfilme != null && idfilme.trim() != ''){
 			 excluirFilme(idfilme);
-			 document.getElementById('formCadastroProduto').reset();
+			 document.getElementById('formCadastroFilmes').reset();
 			}
 		}
 		

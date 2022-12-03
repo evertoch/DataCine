@@ -1,5 +1,11 @@
 package br.edu.unoesc.springboot.datacine.repository;
 
-public class SessaoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import br.edu.unoesc.springboot.datacine.model.Sessao;
+
+@Repository
+public interface SessaoRepository extends JpaRepository<Sessao, Long> {
+	
 }
