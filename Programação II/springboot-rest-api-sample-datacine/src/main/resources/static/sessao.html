@@ -121,7 +121,7 @@
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="nomeFilmeBusca" class="col-form-label">Informe o nome:</label> 
+							<label for="nomeFilmeBusca" class="col-form-label">Informe o nome do filme:</label> 
 							<input type="text" class="form-control" id="nomeFilmeBusca">
 						</div>
 						<button type="button" class="btn btn-success" onclick="buscarFilmePorNome()">Buscar</button>
@@ -140,7 +140,7 @@
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limparPesquisa()">Fechar</button>
 				</div>
 			</div>
 		</div>
@@ -178,7 +178,7 @@
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limparPesquisa()">Fechar</button>
 				</div>
 			</div>
 		</div>
@@ -201,10 +201,10 @@
 	<script type="text/javascript">
 
 	
-	//------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO -------------------------
+//------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO -------------------------
 	
 
-// Função salvarSessao:
+// 		Função salvarSessao:
 	
 		function salvarSessao(){
 			var idsessao = $("#idsessao").val();
@@ -236,7 +236,7 @@
 					data : JSON.stringify({idsessao: idsessao, nome:nome, idfilme: idfilme, idsala: idsala, horses: horses}),
 					contentType : "application/json; charset=utf-8",
 					success : function(response){
-						$("#idsessao").val(response.idsessao);
+// 						$("#idsessao").val(response.idsessao);
 						alert("Sessão criada com sucesso!");
 					}
 				}).fail(function (xhr, status, errorThrown){
@@ -245,7 +245,7 @@
 			}
 		
 	
-//	Função listarTodasSessoes: UTILIZA-SE DO MESMO MÉTODO DE BUSCAR POR NOME.
+//		Função listarTodasSessoes: UTILIZA-SE DO MESMO MÉTODO DE BUSCAR POR NOME.
 
 		function listarTodasSessoes(){
 			var nomeSessaoBusca = $("#nomeSessaoBusca").val();
@@ -318,12 +318,11 @@
 			}
 		}
 
-// //------------------------- FILME ------------------------- FILME ------------------------- FILME ------------------------- FILME -------------------------
+//------------------------- FILME ------------------------- FILME ------------------------- FILME ------------------------- FILME -------------------------
 
 // 			Função buscarFilmePorNome
 		function buscarFilmePorNome(){
 			var nomeFilmeBusca = $("#nomeFilmeBusca").val();
-// 			if (nomeFilmeBusca != null && nomeFilmeBusca.trim()!= ''){
 				$.ajax({ 
 					method : "GET", 
 					url : "buscarFilmeNome", 
@@ -334,13 +333,12 @@
 						for (var i = 0; i < response.length; i++){
 							$('#tabelaresultados > tbody').append('<tr idfilme="'+response[i].idfilme+'"><td>' + 
 									response[i].idfilme + '</td><td>' + 
-									response[i].nome +'</td><td> <button type="button" onclick="preencherFilmeFormulario('+response[i].idfilme +')"class="btn btn-primary" data-bs-dismiss="modal">+</button></td></tr>')
+									response[i].nome +'</td><td> <button type="button" onclick="preencherFilmeFormulario('+response[i].idfilme +'), limparPesquisa()"class="btn btn-primary" data-bs-dismiss="modal">+</button></td></tr>')
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
 					alert("Erro ao buscar o filme!"); 					
 				}); 
-// 			}
 
 		}
 
@@ -360,12 +358,12 @@
 			});
 		}
 
-		// //------------------------- SALA ------------------------- SALA ------------------------- SALA ------------------------- SALA -------------------------
+//------------------------- SALA ------------------------- SALA ------------------------- SALA ------------------------- SALA -------------------------
 		
 // 			Função buscarSalaPorNome
 		function buscarSalaPorNome(){
 			var nomeSalaBusca = $("#nomeSalaBusca").val();
-// 			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){
+// 			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){ -- PODE CONSULTAR TODOS SEM INFORMAR NOME, APENAS CLICANDO EM BUSCAR.
 				$.ajax({ 
 					method : "GET", 
 					url : "buscarSalaNome", 
@@ -376,7 +374,7 @@
 						for (var i = 0; i < response.length; i++){
 							$('#tabelaresultados > tbody').append('<tr idsala="'+response[i].idsala+'"><td>' + 
 									response[i].idsala + '</td><td>' + 
-									response[i].nome +'</td><td> <button type="button" onclick="preencherSalaFormulario('+response[i].idsala +')"class="btn btn-primary" data-bs-dismiss="modal">+</button></td></tr>')					
+									response[i].nome +'</td><td> <button type="button" onclick="preencherSalaFormulario('+response[i].idsala +'), limparPesquisa()"class="btn btn-primary" data-bs-dismiss="modal">+</button></td></tr>')					
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
@@ -402,6 +400,13 @@
 					alert("Erro ao buscar sala por id!");
 				});		  
 		  }
+
+
+// ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS -------------------------	  
+
+			function limparPesquisa(){
+				$("#tabelaresultados > tbody > tr").remove();
+			}
 
 	</script>
 </body>

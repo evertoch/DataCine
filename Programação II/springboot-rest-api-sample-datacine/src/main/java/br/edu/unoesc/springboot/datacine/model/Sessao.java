@@ -16,6 +16,11 @@ import javax.persistence.SequenceGenerator;
 public class Sessao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	public Sessao() {}
+	
+	public Sessao(String idsessao) {
+		this.idsessao = Long.parseLong(idsessao);
+	}	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

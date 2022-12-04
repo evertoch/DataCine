@@ -25,60 +25,80 @@
 <body style= background-color:#e6e6e6;>
 
 
-<div class="formCadastroFilmes row justify-content-center">
-		<h2 class="col-md-3">Cadastro de Filmes</h2><br>
+<!-- Formulário Cadastro de Sessões; -->
+	
+	<div class="formCadastroSessoes row justify-content-center">
+		<h2 class="row col-md-3">Venda de Ingressos</h2><br>
 		<div class="w-100"></div>		
-		<form action="" id="formCadastroFilmes" class="row justify-content-center">
+		<form action="" id="formCadastroSessoes" class="row justify-content-center">
 			<div class="col-md-1">
-	    			<label for="idfilme" class="form-label">ID</label>
-    				<input type="text" class="form-control" id="idfilme" readonly="readonly">
+	    		<label for="idingresso" class="form-label">ID:</label>
+    			<input type="number" class="form-control" id="idingresso" readonly="readonly">
 			</div>
-  			<div class="col-4">
-	    			<label for="nome" class="form-label">Nome:</label>
-    				<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required">
-			</div>
-  			<div class="w-100"></div>
-  			<div class="col-md-2">
-		    		<label for="claind" class="form-label">Classificação Indicativa:</label>
-    				<input type="number" class="form-control" id="claind" placeholder="Idade" required = "required">
+<!-- 			<div class="col-4"> -->
+<!-- 	    		<label for="nome" class="form-label">Nome:</label> -->
+<!--     			<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required"> -->
+<!-- 			</div> -->
+			  <div class="col-1">
+		    	<label for="idsessao" class="form-label">ID da Sessão:</label>
+    			<input type="number" class="form-control" id="idsessao" placeholder="ID da Sessão" required = "required" readonly="readonly">
+    			<button type="button" class=" btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarSessao">Buscar</button>
   			</div>
-  			<div class="col-md-1">
-	    			<label for="dubleg" class="form-label">Dub/Leg:</label>
-    				<select id="dubleg" class="form-select" required = "required">
-	      				<option value="D">Dublado</option>
-      					<option value="L">Legendado</option>
-    			</select>
+			<div class="col-3">
+		    	<label for="nomfil" class="form-label">Nome do filme:</label>
+    			<input type="text" class="form-control" id="nomfil" placeholder="Nome do Filme" required = "required" readonly="readonly">
   			</div>
-  			<div class="w-100"></div>
-  			<div class="col-md-5">
-  				<label for="sinfil" class="form-label">Sinopse:</label>
-  				<textarea class="form-control" id="sinfil" rows="3"></textarea>
+			<div class="w-100"></div>
+			<div class="col-2">
+	    		<label for="nomsal" class="form-label">Nome da sala:</label>
+    			<input type="text" class="form-control" id="nomsal" placeholder="Nome da Sala" required = "required" readonly="readonly">
 			</div>
-  			<div class="w-100"></div><br>
-  			<div class="buttons col-md-5">
-	    		<button type="button" class="btn btn-primary" onclick="salvarFilme()">Salvar</button>
-    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroFilmes').reset();">Limpar</button>
-				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilme">Pesquisar</button>	
-				<button type="button" class="btn btn-danger" onclick="excluirFilmeBotao()">Excluir</button>	
+			<div class="col-1">
+	    		<label for="horses" class="form-label">Horário:</label> <select
+					id="horses" class="form-select" required="required" readonly="readonly">
+					<option value="0" selected>Selecione</option>
+					<option value="16:00" >16:00</option>
+					<option value="19:00">19:00</option>
+					<option value="21:30">21:30</option>		
+				</select>
+			</div>
+			<div class="col-md-2">
+				<label for="valing" class="form-label">Tipo do Ingresso:</label> <select
+					id="valing" class="form-select" required="required">
+					<option value="-1" selected>Selecione</option>
+					<option value="0" >Cortesia (R$ 0,00)</option>
+					<option value="13" >2D - Meia Entrada (R$ 13,00)</option>
+					<option value="26">2D - Entrada Cheia (R$ 26,00)</option>
+					<option value="15">3D - Meia Entrada (R$ 15,00)</option>
+					<option value="30">3D - Entrada Cheia (R$ 30,00)</option>		
+				</select>
+			</div>
+			<div class="w-100"></div><br>
+  			<div class="buttons col-md-4">
+	    		<button type="button" class="btn btn-primary" onclick="salvarIngresso()">Salvar</button>
+    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroSessoes').reset();">Limpar</button>
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarIngressos">Pesquisar</button>	
+				<button type="button" class="btn btn-danger" onclick="excluirIngressoBotao()">Excluir</button>	
   			</div>
   		</form>
 	</div>
+<!-- Fim do Formulário Cadastro de sessaos; -->
 
-  	
-  	<div class="modal" id="modalPesquisarSala" tabindex="-1" aria-labelledby="Pesquisar Salas" aria-hidden="true">
+<!--  Tela do botão Pesquisar; -->  	
+  	<div class="modal" id="modalPesquisarIngressos" tabindex="-1" aria-labelledby="Pesquisar Ingressos" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Salas:</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Ingressos:</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
 				</div>
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="nomeSalaBusca" class="col-form-label">Informe o nome:</label> 
-							<input type="text" class="form-control" id="nomeSalaBusca">
+							<label for="nomfil" class="col-form-label">Use o botão "Listar Todos":</label> 
+							<input type="number" class="form-control" id="nomfil" readonly="readonly">
 						</div>
-						<button type="button" class="btn btn-success" onclick="buscarSalaPorNome()">Buscar</button>
+						<button type="button" class="btn btn-success" onclick="listarTodosIngressos()">Listar Todos</button>
 					</form>
 				</div>
 				<div style="height:300px; overflow:auto;">
@@ -86,8 +106,11 @@
 						<thead>
 							<tr>
 								<th scope="col">ID</th>
-								<th scope="col">Nome</th>
-								<th scope="col">Capacidade</th>
+								<th scope="col">ID da Sessão</th>
+								<th scope="col">Nome do Filme</th>
+								<th scope="col">Nome da sala</th>
+								<th scope="col">Horário</th>
+								<th scope="col">Valor (R$)</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -100,6 +123,48 @@
 			</div>
 		</div>
 	</div>
+<!--  Fim da Tela do botão Pesquisar; -->  
+
+	
+<!--  Tela do botão "Buscar" em ID da Sessão; -->  		
+	  	<div class="modal" id="modalPesquisarSessao" tabindex="-1" aria-labelledby="Pesquisar Ingressos" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Sessões:</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="mb-3">
+							<label for="nomeSessaoBusca" class="col-form-label">Use o botão "Listar Todos":</label> 
+							<input type="text" class="form-control" id="nomeSessaoBusca" readonly="readonly">
+						</div>
+						<button type="button" class="btn btn-success" onclick="listarTodasSessoes()">Listar Todos</button>
+					</form>
+				</div>
+				<div style="height:300px; overflow:auto;">
+					<table class="table table-striped" id="tabelaresultados">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Filme</th>
+								<th scope="col">Sala</th>
+								<th scope="col">Horário</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--  Fim da tela do botão "Buscar" em ID do Filme; -->
 	
 	<script
   		src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -122,108 +187,167 @@
 		
 	<script type="text/javascript">
 
-// Função salvarSala
+	
 
-		function salvarSala(){
-			var idsala = $("#idsala").val();
-			var nome = $("#nome").val();
-			var capsal = $("#capsal").val();
+//------------------------- INGRESSO ------------------------- INGRESSO ------------------------- INGRESSO ------------------------- INGRESSO -------------------------
+
+// Função salvarIngresso
+
+		function salvarIngresso(){
+			var idingresso = $("#idingresso").val();
+			var idsessao = $("#idsessao").val();
+			var nomfil = $("#nomfil").val();
+			var valing = $("#valing").val();
 			
-			if(nome == ""){
-				alert("Informe o nome da sala!");
-				$("#nome").focus();
+			if(valing < 0){
+				alert("Selecione o tipo do ingresso");
+				$("#valing").focus();
 				return;
 			}
-			if(capsal <= 0){
-				alert("Preencha a capacidade da sala!");
-				$("#capsal").focus();
+			if(horses = 0){
+				alert("Selecione um horário");
+				$("#horses").focus();
 				return;	
 			}
 				$.ajax({
 					method : "POST",
-					url : "salvarSala",
-					data : JSON.stringify({idsala: idsala, nome: nome, capsal: capsal}),
+					url : "salvarIngresso",
+					data : JSON.stringify({idingresso: idingresso, idsessao: idsessao, nomfil:nomfil, valing: valing}),
 					contentType : "application/json; charset=utf-8",
 					success : function(response){
-						$("#idsala").val(response.idsala);
-						alert("Sala criada com sucesso!");
+						$("#idingresso").val(response.idsala);
+						alert("Ingresso vendido com sucesso!");
 					}
 				}).fail(function (xhr, status, errorThrown){
-					alert("Erro ao salvar a sala!");
+					alert("Erro ao realizar a venda!");
 				});	
 			}
 			
-//	 	Função buscarSalaPorNome
+			
+//	 	Função listarTodosIngressos
 
-		function buscarSalaPorNome(){
-			var nomeSalaBusca = $("#nomeSalaBusca").val();
-// 			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){
+		function listarTodosIngressos(){
+			var nomfil = $("#nomfil").val();
 				$.ajax({ 
 					method : "GET", 
-					url : "buscarSalaNome", 
-					data : "nome=" + nomeSalaBusca,
+					url : "buscarIngressoNome", 
+					data : "nomfil=" + nomfil,
 					success : 
 					function(response){
 						$("#tabelaresultados > tbody > tr").remove();
 						for (var i = 0; i < response.length; i++){
-							$('#tabelaresultados > tbody').append('<tr idsala="'+response[i].idsala+'"><td>' + 
-									response[i].idsala + '</td><td>' + 
-									response[i].nome + '</td><td>' +
-									response[i].capsal +'</td><td> <button type="button" onclick="colocarSalaEmEdicao('+response[i].idsala +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirSala('+response[i].idsala +')">x</button></td></tr>')					
+							$('#tabelaresultados > tbody').append('<tr idingresso="'+response[i].idingresso+'"><td>' + 
+									response[i].idingresso + '</td><td>' + 
+									response[i].idsessao.idsessao + '</td><td>' +
+									response[i].idsessao.idfilme.nome + '</td><td>' +
+									response[i].idsessao.idsala.nome + '</td><td>' +
+									response[i].idsessao.horses + '</td><td>' +
+									response[i].valing +'</td><td> <button type="button" onclick="colocarIngressoEmEdicao('+response[i].idingresso +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirIngresso('+response[i].idingresso +')">x</button></td></tr>')						
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
 					alert("Erro ao buscar a sala!"); 					
-				}); 
-// 			}		
+				}); 	
 		}
-		
-//      Função colocarSalaEmEdicao
-		function colocarSalaEmEdicao(idsala) {		  
-			  $.ajax({
-					method : "GET",
-					url : "buscarSalaId",
-					data : "idsala=" + idsala ,
-					success : function(response) {
-						$("#idsala").val(response.idsala);
-						$("#nome").val(response.nome);
-						$("#capsal").val(response.capsal);
-						$('#modalPesquisarSala').modal('hide');			  
-					}
-			  
-			  
-				}).fail(function(xhr, status, errorThrown) {
-					alert("Erro ao buscar sala por id!");
-				});		  
-		  }
-		  
-//	 	Função excluirSala 
 
-		function excluirSala(idsala){		
-			if(confirm('Deseja realmente excluir a sala selecionada?')) {		
+		
+//      Função colocarIngressoEmEdicao
+	  
+			function colocarIngressoEmEdicao(idingresso) {		  
+				  $.ajax({
+						method : "GET",
+						url : "buscarIngressoId",
+						data : "idingresso=" + idingresso,
+						success : function(response) {
+							$("#idingresso").val(response.idingresso);
+							$("#idsessao").val(response.idsessao.idsessao);
+							$("#nomfil").val(response.nomfil);
+							$("#nomsal").val(response.idsessao.idsala.nome);
+							$("#horses").val(response.idsessao.horses);
+							$("#valing").val(response.valing);
+							$('#modalPesquisarIngressos').modal('hide');			  
+						}
+					}).fail(function(xhr, status, errorThrown) {
+						alert("Erro ao buscar sessão por id!");
+					});		  
+			  }
+		  
+//	 	Função excluirIngresso 
+
+		function excluirIngresso(idingresso){		
+			if(confirm('Deseja realmente excluir o ingresso selecionado?')) {		
 			 $.ajax({
 				method : "DELETE",
-				url : "deletarSalaId",
-				data : "idsala=" + idsala ,
+				url : "deletarIngressoId",
+				data : "idingresso=" + idingresso,
 				success : function(response) {					
-					$('#'+ idsala).remove();
+					$('#'+ idingresso).remove();
 					alert(response);	  
 				}
 			}).fail(function(xhr, status, errorThrown) {
-				alert("Erro ao deletar a sala pelo código!");
+				alert("Erro ao deletar o ingresso selecionado!");
 			});		 
 			}		
 		}
 
 //	 	Função excluirSalaBotao 
 
-		function excluirSalaBotao(){
-			var idsala = $('#idsala').val();		
-			if(idsala != null && idsala.trim() != ''){
-			 excluirSala(idsala);
+		function excluirIngressoBotao(){
+			var idingresso = $('#idingresso').val();		
+			if(idingresso != null && idingresso.trim() != ''){
+			 excluirIngresso(idingresso);
 			 document.getElementById('formCadastroSala').reset();
 			}
 		}
+		
+
+//------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO -------------------------
+		
+		
+//		Função listarTodasSessoes: UTILIZA-SE DO MESMO MÉTODO DE BUSCAR POR NOME.
+
+		function listarTodasSessoes(){
+			var nomeSessaoBusca = $("#nomeSessaoBusca").val();
+				$.ajax({ 
+					method : "GET", 
+					url : "buscarSessaoNome", 
+					data : "nome=" + nomeSessaoBusca,
+					success : 
+					function(response){
+						$("#tabelaresultados > tbody > tr").remove();
+						for (var i = 0; i < response.length; i++){
+							$('#tabelaresultados > tbody').append('<tr idfilme="'+response[i].idsessao+'"><td>' + 
+									response[i].idsessao + '</td><td>' + 
+									response[i].nome + '</td><td>' +
+									response[i].idfilme.nome + '</td><td>' +
+									response[i].idsala.nome + '</td><td>' +									
+									response[i].horses +'</td><td> <button type="button" onclick="colocarSessaoEmEdicao('+response[i].idsessao +')"class="btn btn-primary">+</button></td></tr>')					
+						}
+					}
+				}).fail(function (xhr, status, errorThrown){ 
+					alert("Erro ao buscar a sessão!"); 					
+				}); 		
+		}
+		
+		
+//      Função colocarSessaoEmEdicao
+
+		function colocarSessaoEmEdicao(idsessao) {		  
+			  $.ajax({
+					method : "GET",
+					url : "buscarSessaoId",
+					data : "idsessao=" + idsessao ,
+					success : function(response) {
+						$("#idsessao").val(response.idsessao);
+						$("#nomfil").val(response.idfilme.nome);
+						$("#nomsal").val(response.idsala.nome);
+						$("#horses").val(response.horses);
+						$('#modalPesquisarSessao').modal('hide');			  
+					}
+				}).fail(function(xhr, status, errorThrown) {
+					alert("Erro ao buscar sessão por id!");
+				});		  
+		  }
 
 	
 		

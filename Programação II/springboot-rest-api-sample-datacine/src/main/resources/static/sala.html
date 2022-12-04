@@ -128,7 +128,7 @@
 					data : JSON.stringify({idsala: idsala, nome: nome, capsal: capsal}),
 					contentType : "application/json; charset=utf-8",
 					success : function(response){
-						$("#idsala").val(response.idsala);
+// 						$("#idsala").val(response.idsala);  - O campo ID não voltará preenchido após clicar em salvar, o que facilita novos cadastros sem precisar "LIMPAR" os campos.
 						alert("Sala criada com sucesso!");
 					}
 				}).fail(function (xhr, status, errorThrown){

@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unoesc.springboot.datacine.model.Filme;
+import br.edu.unoesc.springboot.datacine.model.Ingresso;
 import br.edu.unoesc.springboot.datacine.model.Sala;
 import br.edu.unoesc.springboot.datacine.model.Sessao;
 import br.edu.unoesc.springboot.datacine.repository.FilmeRepository;
+import br.edu.unoesc.springboot.datacine.repository.IngressoRepository;
 import br.edu.unoesc.springboot.datacine.repository.SalaRepository;
 import br.edu.unoesc.springboot.datacine.repository.SessaoRepository;
 
@@ -45,7 +47,7 @@ public class GreetingsController {
     }
 
  
-//   **************** FILME  *******************
+//------------------------- FILME ------------------------- FILME ------------------------- FILME ------------------------- FILME -------------------------
 
 
     @Autowired // injeção de dependência
@@ -86,7 +88,7 @@ public class GreetingsController {
 		return new ResponseEntity<List<Filme>>(filme, HttpStatus.OK);
 	}	
 
-//  **************** SALA  *******************
+ //------------------------- SALA ------------------------- SALA ------------------------- SALA ------------------------- SALA -------------------------
     
     @Autowired // injeção de dependência
    	private SalaRepository salaRepository;
@@ -119,7 +121,8 @@ public class GreetingsController {
 		return new ResponseEntity<String>("Sala excluída com sucesso!", HttpStatus.OK);
 	}
     
-//  **************** SESSAO  *******************
+//------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO -------------------------
+
     
     @Autowired // injeção de dependência
    	private SessaoRepository sessaoRepository;
@@ -143,8 +146,7 @@ public class GreetingsController {
 	@ResponseBody
 	public ResponseEntity<Sessao> buscarSessaoId(@RequestParam(name = "idsessao") Long idsessao){
 		Sessao sessao = sessaoRepository.findById(idsessao).get();
-		return new ResponseEntity<Sessao>(sessao, HttpStatus.OK);
-		
+		return new ResponseEntity<Sessao>(sessao, HttpStatus.OK);	
 	}
 	
 	@DeleteMapping(value = "deletarSessaoId")
@@ -153,6 +155,43 @@ public class GreetingsController {
 		sessaoRepository.deleteById(idsessao);
 		return new ResponseEntity<String>("Sessão excluída com sucesso!", HttpStatus.OK);
 	}
+	
+//------------------------- INGRESSO ------------------------- INGRESSO ------------------------- INGRESSO ------------------------- INGRESSO -------------------------
+    
+	@Autowired // injeção de dependência
+   	private IngressoRepository ingressoRepository;
+	
+	@PostMapping(value = "salvarIngresso")
+	@ResponseBody
+	public ResponseEntity<Ingresso> salvarIngresso(@RequestBody Ingresso ingresso) {
+		Ingresso ingress = ingressoRepository.save(ingresso);
+		return new ResponseEntity<Ingresso>(ingress, HttpStatus.CREATED);	
+	}
+	
+	@DeleteMapping(value = "deletarIngressoId")
+	@ResponseBody
+	public ResponseEntity<String> deletarIngressoId(@RequestParam Long idingresso) {
+		ingressoRepository.deleteById(idingresso);
+		return new ResponseEntity<String>("Ingresso excluído com sucesso!", HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "buscarIngressoId")
+	@ResponseBody
+	public ResponseEntity<Ingresso> buscarIngressoId(@RequestParam(name = "idingresso") Long idingresso){
+		Ingresso ingresso = ingressoRepository.findById(idingresso).get();
+		return new ResponseEntity<Ingresso>(ingresso, HttpStatus.OK);	
+	}
+	
+    @GetMapping(value = "buscarIngressoNome")
+	@ResponseBody
+	public ResponseEntity<List<Ingresso>>buscarIngressoNome(@RequestParam(name = "nomfil") String nomfil){
+		List<Ingresso> ingresso = ingressoRepository.ingressoByName(nomfil.trim().toUpperCase());
+		return new ResponseEntity<List<Ingresso>>(ingresso, HttpStatus.OK);
+	
+    }
+
+    
     
 }
+
 

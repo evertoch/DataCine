@@ -43,7 +43,7 @@
 		<div class="w-100"></div>		
 		<form action="" id="formCadastroFilmes" class="row justify-content-center">
 			<div class="col-md-1">
-	    		<label for="idfilme" class="form-label">ID</label>
+	    		<label for="idfilme" class="form-label">ID:</label>
     			<input type="text" class="form-control" id="idfilme" readonly="readonly">
 			</div>
   			<div class="col-4">
@@ -164,8 +164,13 @@
 				$("#nome").focus();
 				return;
 			}
-			if(claind <= 0){
+			if(claind < 0){
 				alert("Preencha a classificação indicativa!");
+				$("#claind").focus();
+				return;	
+			}
+			if(claind > 21){
+				alert("Informe uma classificação indicativa válida!");
 				$("#claind").focus();
 				return;	
 			}
@@ -180,7 +185,7 @@
 				data : JSON.stringify({idfilme: idfilme, nome: nome, claind: claind, mesexi: mesexi, dubleg: dubleg, sinfil: sinfil}),
 				contentType : "application/json; charset=utf-8",
 				success : function(response){
-					$("#idfilme").val(response.cod);
+// 					$("#idfilme").val(response.idfilme); - O campo ID não voltará preenchido após clicar em salvar, o que facilita novos cadastros sem precisar "LIMPAR" os campos.
 					alert("Filme salvo com sucesso!");
 				}
 			}).fail(function (xhr, status, errorThrown){

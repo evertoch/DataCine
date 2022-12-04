@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -14,19 +16,21 @@ import javax.persistence.SequenceGenerator;
 public class Ingresso implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idingresso", length=10 , nullable=false, columnDefinition = "integer")
 	private Long idingresso;
 	
-	@Column(name="datven", length=8, nullable=false, columnDefinition = "varchar(8)")
-	private String datven;
+	@ManyToOne
+	@JoinColumn(name="idsessao", referencedColumnName = "idsessao", nullable = false, columnDefinition = "integer")
+	private Sessao idsessao;
+	
+	@Column(name="nomfil", length=45 , nullable=false, columnDefinition = "varchar(45)")
+	private String nomfil;
 	
 	@Column(name="valing", length=3 , nullable=false, columnDefinition = "numeric")
 	private int valing;
-	
-	@Column(name="idsessao", length=3 , nullable=false, columnDefinition = "integer")
-	private int idsessao;
 
 	public Long getIdingresso() {
 		return idingresso;
@@ -36,12 +40,20 @@ public class Ingresso implements Serializable{
 		this.idingresso = idingresso;
 	}
 
-	public String getDatven() {
-		return datven;
+	public Sessao getIdsessao() {
+		return idsessao;
 	}
 
-	public void setDatven(String datven) {
-		this.datven = datven;
+	public void setIdsessao(Sessao idsessao) {
+		this.idsessao = idsessao;
+	}
+
+	public String getNomfil() {
+		return nomfil;
+	}
+
+	public void setNomfil(String nomfil) {
+		this.nomfil = nomfil;
 	}
 
 	public int getValing() {
@@ -52,16 +64,10 @@ public class Ingresso implements Serializable{
 		this.valing = valing;
 	}
 
-	public int getIdsessao() {
-		return idsessao;
-	}
-
-	public void setIdsessao(int idsessao) {
-		this.idsessao = idsessao;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-		
+
+	
+	
 }
