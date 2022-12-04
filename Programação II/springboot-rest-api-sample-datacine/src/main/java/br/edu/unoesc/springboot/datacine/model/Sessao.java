@@ -17,16 +17,13 @@ public class Sessao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 
-	public Sessao() {}
-	
-	public Sessao(String idsessao) {
-		this.idsessao = Long.parseLong(idsessao);
-	}
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idsessao", length=10 , nullable=false, columnDefinition = "integer")
 	private Long idsessao;
+	
+	@Column(name="nome", length=45, nullable=false, columnDefinition = "varchar(45)")
+	private String nome;
 	
 	@Column(name="horses", length=8, nullable=false, columnDefinition = "varchar(45)")
 	private String horses;	
@@ -39,13 +36,20 @@ public class Sessao implements Serializable{
 	@JoinColumn(name="idsala", referencedColumnName = "idsala", nullable = false, columnDefinition = "integer")
 	private Sala idsala;
 
-
 	public Long getIdsessao() {
 		return idsessao;
 	}
 
 	public void setIdsessao(Long idsessao) {
 		this.idsessao = idsessao;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getHorses() {
@@ -75,8 +79,6 @@ public class Sessao implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	
-
-	
 }
+
+	

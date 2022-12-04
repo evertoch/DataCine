@@ -12,7 +12,7 @@ import br.edu.unoesc.springboot.datacine.model.Sessao;
 @Repository
 public interface SessaoRepository extends JpaRepository<Sessao, Long> {
 	
-	@Query(value = "select u from Sessao u where upper(trim(u.idsessao)) like %?1%")
-	List<Sessao> sessaoById(String id);
+	@Query(value = "select u from Sessao u where upper(trim(u.nome)) like %?1%")
+	List<Sessao> sessaoByName(String id);
 	
 }

@@ -125,19 +125,26 @@ public class GreetingsController {
    	private SessaoRepository sessaoRepository;
     
 	
-    @GetMapping(value = "buscarSessaoId")
+    @GetMapping(value = "buscarSessaoNome")
 	@ResponseBody
-	public ResponseEntity<Sessao> buscarSessaoId(@RequestParam(name = "idsessao") Long idsessao){
-		Sessao sessao = sessaoRepository.findById(idsessao).get();
-		return new ResponseEntity<Sessao>(sessao, HttpStatus.OK);
-	}
-	
+	public ResponseEntity<List<Sessao>>buscarSessaoNome(@RequestParam(name = "nome") String nome){
+		List<Sessao> sessao = sessaoRepository.sessaoByName(nome.trim().toUpperCase());
+		return new ResponseEntity<List<Sessao>>(sessao, HttpStatus.OK);
+    }
+	    
 	@PostMapping(value = "salvarSessao")
 	@ResponseBody
 	public ResponseEntity<Sessao> salvarSessao(@RequestBody Sessao sessao) {
 		Sessao sessa= sessaoRepository.save(sessao);
 		return new ResponseEntity<Sessao>(sessa, HttpStatus.CREATED);
-	
+	}
+		
+	@GetMapping(value = "buscarSessaoId")
+	@ResponseBody
+	public ResponseEntity<Sessao> buscarSessaoId(@RequestParam(name = "idsessao") Long idsessao){
+		Sessao sessao = sessaoRepository.findById(idsessao).get();
+		return new ResponseEntity<Sessao>(sessao, HttpStatus.OK);
+		
 	}
 	
 	@DeleteMapping(value = "deletarSessaoId")
@@ -146,7 +153,6 @@ public class GreetingsController {
 		sessaoRepository.deleteById(idsessao);
 		return new ResponseEntity<String>("Sessão excluída com sucesso!", HttpStatus.OK);
 	}
-
     
 }
 

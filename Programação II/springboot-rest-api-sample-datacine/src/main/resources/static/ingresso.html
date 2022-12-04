@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+	rel="stylesheet" 
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+
+	<link rel="icon" type="image/png" href="assets/img/favicon.png"/>
+	
+	<title>DataCine - Gestão de Cinema</title>
+	
+	<style>
+		:root{
+			--bs-body-bg: #DCDCDC;
+		}			
+	</style>
+	
+</head>
+
+<body style= background-color:#e6e6e6;>
+
+
+<div class="formCadastroFilmes row justify-content-center">
+		<h2 class="col-md-3">Cadastro de Filmes</h2><br>
+		<div class="w-100"></div>		
+		<form action="" id="formCadastroFilmes" class="row justify-content-center">
+			<div class="col-md-1">
+	    			<label for="idfilme" class="form-label">ID</label>
+    				<input type="text" class="form-control" id="idfilme" readonly="readonly">
+			</div>
+  			<div class="col-4">
+	    			<label for="nome" class="form-label">Nome:</label>
+    				<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required">
+			</div>
+  			<div class="w-100"></div>
+  			<div class="col-md-2">
+		    		<label for="claind" class="form-label">Classificação Indicativa:</label>
+    				<input type="number" class="form-control" id="claind" placeholder="Idade" required = "required">
+  			</div>
+  			<div class="col-md-1">
+	    			<label for="dubleg" class="form-label">Dub/Leg:</label>
+    				<select id="dubleg" class="form-select" required = "required">
+	      				<option value="D">Dublado</option>
+      					<option value="L">Legendado</option>
+    			</select>
+  			</div>
+  			<div class="w-100"></div>
+  			<div class="col-md-5">
+  				<label for="sinfil" class="form-label">Sinopse:</label>
+  				<textarea class="form-control" id="sinfil" rows="3"></textarea>
+			</div>
+  			<div class="w-100"></div><br>
+  			<div class="buttons col-md-5">
+	    		<button type="button" class="btn btn-primary" onclick="salvarFilme()">Salvar</button>
+    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroFilmes').reset();">Limpar</button>
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilme">Pesquisar</button>	
+				<button type="button" class="btn btn-danger" onclick="excluirFilmeBotao()">Excluir</button>	
+  			</div>
+  		</form>
+	</div>
+
+  	
+  	<div class="modal" id="modalPesquisarSala" tabindex="-1" aria-labelledby="Pesquisar Salas" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pesquisa de Salas:</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="mb-3">
+							<label for="nomeSalaBusca" class="col-form-label">Informe o nome:</label> 
+							<input type="text" class="form-control" id="nomeSalaBusca">
+						</div>
+						<button type="button" class="btn btn-success" onclick="buscarSalaPorNome()">Buscar</button>
+					</form>
+				</div>
+				<div style="height:300px; overflow:auto;">
+					<table class="table table-striped" id="tabelaresultados">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Capacidade</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script
+  		src="https://code.jquery.com/jquery-3.6.1.min.js"
+  		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  		crossorigin="anonymous">
+	</script>
+	
+	<script
+  		src="https://code.jquery.com/jquery-3.6.1.min.js"
+  		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  		crossorigin="anonymous">
+	</script>
+  
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous">
+	</script>
+		
+	<script type="text/javascript">
+
+// Função salvarSala
+
+		function salvarSala(){
+			var idsala = $("#idsala").val();
+			var nome = $("#nome").val();
+			var capsal = $("#capsal").val();
+			
+			if(nome == ""){
+				alert("Informe o nome da sala!");
+				$("#nome").focus();
+				return;
+			}
+			if(capsal <= 0){
+				alert("Preencha a capacidade da sala!");
+				$("#capsal").focus();
+				return;	
+			}
+				$.ajax({
+					method : "POST",
+					url : "salvarSala",
+					data : JSON.stringify({idsala: idsala, nome: nome, capsal: capsal}),
+					contentType : "application/json; charset=utf-8",
+					success : function(response){
+						$("#idsala").val(response.idsala);
+						alert("Sala criada com sucesso!");
+					}
+				}).fail(function (xhr, status, errorThrown){
+					alert("Erro ao salvar a sala!");
+				});	
+			}
+			
+//	 	Função buscarSalaPorNome
+
+		function buscarSalaPorNome(){
+			var nomeSalaBusca = $("#nomeSalaBusca").val();
+// 			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){
+				$.ajax({ 
+					method : "GET", 
+					url : "buscarSalaNome", 
+					data : "nome=" + nomeSalaBusca,
+					success : 
+					function(response){
+						$("#tabelaresultados > tbody > tr").remove();
+						for (var i = 0; i < response.length; i++){
+							$('#tabelaresultados > tbody').append('<tr idsala="'+response[i].idsala+'"><td>' + 
+									response[i].idsala + '</td><td>' + 
+									response[i].nome + '</td><td>' +
+									response[i].capsal +'</td><td> <button type="button" onclick="colocarSalaEmEdicao('+response[i].idsala +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirSala('+response[i].idsala +')">x</button></td></tr>')					
+						}
+					}
+				}).fail(function (xhr, status, errorThrown){ 
+					alert("Erro ao buscar a sala!"); 					
+				}); 
+// 			}		
+		}
+		
+//      Função colocarSalaEmEdicao
+		function colocarSalaEmEdicao(idsala) {		  
+			  $.ajax({
+					method : "GET",
+					url : "buscarSalaId",
+					data : "idsala=" + idsala ,
+					success : function(response) {
+						$("#idsala").val(response.idsala);
+						$("#nome").val(response.nome);
+						$("#capsal").val(response.capsal);
+						$('#modalPesquisarSala').modal('hide');			  
+					}
+			  
+			  
+				}).fail(function(xhr, status, errorThrown) {
+					alert("Erro ao buscar sala por id!");
+				});		  
+		  }
+		  
+//	 	Função excluirSala 
+
+		function excluirSala(idsala){		
+			if(confirm('Deseja realmente excluir a sala selecionada?')) {		
+			 $.ajax({
+				method : "DELETE",
+				url : "deletarSalaId",
+				data : "idsala=" + idsala ,
+				success : function(response) {					
+					$('#'+ idsala).remove();
+					alert(response);	  
+				}
+			}).fail(function(xhr, status, errorThrown) {
+				alert("Erro ao deletar a sala pelo código!");
+			});		 
+			}		
+		}
+
+//	 	Função excluirSalaBotao 
+
+		function excluirSalaBotao(){
+			var idsala = $('#idsala').val();		
+			if(idsala != null && idsala.trim() != ''){
+			 excluirSala(idsala);
+			 document.getElementById('formCadastroSala').reset();
+			}
+		}
+
+	
+		
+	</script>
+</body>
+</html>

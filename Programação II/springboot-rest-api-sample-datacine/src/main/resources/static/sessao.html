@@ -25,7 +25,7 @@
 <body style= background-color:#e6e6e6;>
 
 
-<!--  Formulário Cadastro de Sessões; -->
+<!-- Formulário Cadastro de Sessões; -->
 	
 	<div class="formCadastroSessoes row justify-content-center">
 		<h2 class="row col-md-3">Cadastro de Sessões</h2><br>
@@ -35,12 +35,17 @@
 	    		<label for="idsessao" class="form-label">ID:</label>
     			<input type="number" class="form-control" id="idsessao" readonly="readonly">
 			</div>
-  			<div class="col-1">
+			<div class="col-4">
+	    		<label for="nome" class="form-label">Nome:</label>
+    			<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required">
+			</div>
+			<div class="w-100"></div>
+  			<div class="col-2">
 		    	<label for="idfilme" class="form-label">Filme:</label>
     			<input type="number" class="form-control" id="idfilme" placeholder="ID do Filme" required = "required" readonly="readonly">
-    			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilmes">Buscar</button>
+    			<button type="button" class=" btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilmes">Buscar</button>
   			</div>
-			<div class="col-1">
+			<div class="col-2">
 		    	<label for="idsala" class="form-label">Sala:</label>
     			<input type="number" class="form-control" id="idsala" placeholder="ID da Sala" required = "required" readonly="readonly">
     			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarSalas">Buscar</button>
@@ -56,13 +61,12 @@
 			<div class="w-100"></div><br>
   			<div class="buttons col-md-4">
 	    		<button type="button" class="btn btn-primary" onclick="salvarSessao()">Salvar</button>
-    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroSessaos').reset();">Limpar</button>
+    			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroSessoes').reset();">Limpar</button>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarSessao">Pesquisar</button>	
 				<button type="button" class="btn btn-danger" onclick="excluirSessaoBotao()">Excluir</button>	
   			</div>
   		</form>
 	</div>
-
 <!-- Fim do Formulário Cadastro de sessaos; -->
 
 <!--  Tela do botão Pesquisar; -->  	
@@ -76,10 +80,10 @@
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="idSessaoBusca" class="col-form-label">Informe o ID:</label> 
-							<input type="number" class="form-control" id="idSessaoBusca">
+							<label for="nomeSessaoBusca" class="col-form-label">Use o botão "Listar Todos":</label> 
+							<input type="text" class="form-control" id="nomeSessaoBusca" readonly="readonly">
 						</div>
-						<button type="button" class="btn btn-success" onclick="buscarSessaoId()">Buscar</button>
+						<button type="button" class="btn btn-success" onclick="listarTodasSessoes()">Listar Todos</button>
 					</form>
 				</div>
 				<div style="height:300px; overflow:auto;">
@@ -87,6 +91,7 @@
 						<thead>
 							<tr>
 								<th scope="col">ID</th>
+								<th scope="col">Nome</th>
 								<th scope="col">Filme</th>
 								<th scope="col">Sala</th>
 								<th scope="col">Horário</th>
@@ -140,7 +145,6 @@
 			</div>
 		</div>
 	</div>
-
 <!--  Fim da tela do botão "Buscar" em ID do Filme; -->
 
 
@@ -155,7 +159,7 @@
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="nomeFilmeBusca" class="col-form-label">Informe a descrição da sala:</label> 
+							<label for="nomeSalaBusca" class="col-form-label">Informe a descrição da sala:</label> 
 							<input type="text" class="form-control" id="nomeSalaBusca">
 						</div>
 						<button type="button" class="btn btn-success" onclick="buscarSalaPorNome()">Buscar</button>
@@ -178,8 +182,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	
+	</div>	
 <!-- Fim da tela do botão "Buscar" em ID da sala; -->
 	
 	<script
@@ -198,12 +201,14 @@
 	<script type="text/javascript">
 
 	
-	// ------------------ SESSÃO ------------------
+	//------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO ------------------------- SESSÃO -------------------------
 	
-// Função salvarSessao
 
+// Função salvarSessao:
+	
 		function salvarSessao(){
 			var idsessao = $("#idsessao").val();
+			var nome = $("#nome").val();
 			var idfilme = $("#idfilme").val();
 			var idsala = $("#idsala").val();
 			var horses = $("#horses").val();
@@ -212,16 +217,23 @@
 				alert("Selecione um filme!");
 				$("#idfilme").focus();
 				return;
+			
+			}	
+			if(nome == ""){
+					alert("Informe um nome!");
+					$("#idfilme").focus();
+					return;
+				
 			}
 			if(idsala == ""){
-				alert("Selecione um filme!");
+				alert("Selecione uma sala!");
 				$("#idfilme").focus();
 				return;
 			}
 				$.ajax({
 					method : "POST",
 					url : "salvarSessao",
-					data : JSON.stringify({idsessao: idsessao, idfilme: idfilme, idsala: idsala, horses: horses}),
+					data : JSON.stringify({idsessao: idsessao, nome:nome, idfilme: idfilme, idsala: idsala, horses: horses}),
 					contentType : "application/json; charset=utf-8",
 					success : function(response){
 						$("#idsessao").val(response.idsessao);
@@ -232,31 +244,31 @@
 				});	
 			}
 		
-//	 	Função buscarSessaoId
+	
+//	Função listarTodasSessoes: UTILIZA-SE DO MESMO MÉTODO DE BUSCAR POR NOME.
 
-		function buscarSessaoId(){
-			var idSessaoBusca = $("#idSessaoBusca").val();
-// 			if (idSessaoBusca != null && idSessaoBusca.trim()!= ''){
+		function listarTodasSessoes(){
+			var nomeSessaoBusca = $("#nomeSessaoBusca").val();
 				$.ajax({ 
 					method : "GET", 
-					url : "buscarSessaoId",
-					data : "idsessao" + idSessaoBusca,
+					url : "buscarSessaoNome", 
+					data : "nome=" + nomeSessaoBusca,
 					success : 
 					function(response){
 						$("#tabelaresultados > tbody > tr").remove();
 						for (var i = 0; i < response.length; i++){
-							$('#tabelaresultados > tbody').append('<tr idsessao="'+response[i].idsessao+'"><td>' + 
+							$('#tabelaresultados > tbody').append('<tr idfilme="'+response[i].idsessao+'"><td>' + 
 									response[i].idsessao + '</td><td>' + 
-									response[i].idfilme + '</td><td>' +
-									response[i].idsala + '</td><td>' +
-									response[i].horses + '</td><td> <button type="button" onclick="colocarSessaoEmEdicao('+response[i].idsessao +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirSessao('+response[i].idsessao +')">x</button></td></tr>')					
+									response[i].nome + '</td><td>' +
+									response[i].idfilme.nome + '</td><td>' +
+									response[i].idsala.nome + '</td><td>' +									
+									response[i].horses +'</td><td> <button type="button" onclick="colocarSessaoEmEdicao('+response[i].idsessao +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirSessao('+response[i].idsessao +')">x</button></td></tr>')					
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
 					alert("Erro ao buscar a sessão!"); 					
-				}); 
-// 			}
-	}
+				}); 		
+		}
 		
 		
 //      Função colocarSessaoEmEdicao
@@ -268,11 +280,11 @@
 					success : function(response) {
 						$("#idsessao").val(response.idsessao);
 						$("#nome").val(response.nome);
-						$("#capsal").val(response.capsal);
+						$("#idfilme").val(response.idfilme.idfilme);
+						$("#idsala").val(response.idsala.idsala);
+						$("#horses").val(response.horses);
 						$('#modalPesquisarSessao').modal('hide');			  
 					}
-			  
-			  
 				}).fail(function(xhr, status, errorThrown) {
 					alert("Erro ao buscar sessão por id!");
 				});		  
@@ -284,14 +296,14 @@
 			if(confirm('Deseja realmente excluir a sessão selecionada?')) {		
 			 $.ajax({
 				method : "DELETE",
-				url : "deletarSessaoID",
+				url : "deletarSessaoId",
 				data : "idsessao=" + idsessao ,
 				success : function(response) {					
 					$('#'+ idsessao).remove();
 					alert(response);	  
 				}
 			}).fail(function(xhr, status, errorThrown) {
-				alert("Erro ao deletar a sessão pelo código!");
+				alert("Erro ao deletar a sessão pelo ID!");
 			});		 
 			}		
 		}
@@ -306,7 +318,7 @@
 			}
 		}
 
-// ------------------ FILME ------------------
+// //------------------------- FILME ------------------------- FILME ------------------------- FILME ------------------------- FILME -------------------------
 
 // 			Função buscarFilmePorNome
 		function buscarFilmePorNome(){
@@ -341,7 +353,6 @@
 				data : "idfilme=" + idfilme,
 				success : function(response) {
 					$("#idfilme").val(response.idfilme);
-					$("#nome").val(response.nome);
 					$('#modalPesquisarFilme').modal('hide');
 				}
 			}).fail(function(xhr, status, errorThrown) {
@@ -349,7 +360,7 @@
 			});
 		}
 
-		// ------------------ SALA ------------------
+		// //------------------------- SALA ------------------------- SALA ------------------------- SALA ------------------------- SALA -------------------------
 		
 // 			Função buscarSalaPorNome
 		function buscarSalaPorNome(){
@@ -383,7 +394,6 @@
 					data : "idsala=" + idsala ,
 					success : function(response) {
 						$("#idsala").val(response.idsala);
-						$("#nome").val(response.nome);
 						$('#modalPesquisarSala').modal('hide');			  
 					}
 			  
