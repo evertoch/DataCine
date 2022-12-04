@@ -29,12 +29,12 @@ goto MenuInicial
 )
 
 :MenuInicial_backup
-MKDIR %USERPROFILE%\Desktop\Backup_DataCine
-cd %USERPROFILE%\Desktop\Backup_DataCine
+MKDIR "%USERPROFILE%"\Desktop\Backup_DataCine
+cd "%USERPROFILE%"\Desktop\Backup_DataCine
 ECHO %date:~6,4%.%date:~3,2%.%date:~0,2% - %time:~0,2%:%time:~-8,2%: BACKUP iniciado >> sgbd.log
 ECHO Em execucao...
 "c:\Program Files\PostgreSQL\14\bin\pg_dump.exe" -Fc -U postgres -d datacine -C -Fp -f  backup.bak >> sgbd.log
-ren "%USERPROFILE%\Desktop\Backup_DataCine\backup.bak" "Backup_datacine_%date:~6,4%.%date:~3,2%.%date:~0,2%_%time:~0,2%%time:~-8,2%.bak" >> sgbd.log
+ren ""%USERPROFILE%"\Desktop\Backup_DataCine\backup.bak" "Backup_datacine_%date:~6,4%.%date:~3,2%.%date:~0,2%_%time:~0,2%%time:~-8,2%.bak" >> sgbd.log
 
 ECHO %date:~6,4%.%date:~3,2%.%date:~0,2% - %time:~0,2%:%time:~-8,2%: BACKUP concluido >> sgbd.log
 goto MenuInicial
