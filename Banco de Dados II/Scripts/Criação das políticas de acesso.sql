@@ -43,7 +43,7 @@ grant atendente to atendente1;
 
 grant all privileges
 on all tables in schema public
-to desenvolvedor;
+to ti;
 
 -- Conceções de permissões ao grupo "Gerente".
 
