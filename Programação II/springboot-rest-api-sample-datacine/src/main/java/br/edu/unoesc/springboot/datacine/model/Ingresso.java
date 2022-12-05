@@ -11,26 +11,46 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+/**
+ * Classe Ingresso: classe com mapeamento para criacao da tabela ingresso.
+ * @author Everto Carlos Holleweiger
+ */
 @Entity
 @SequenceGenerator(name = "seq_ingresso", sequenceName = "seq_ingresso", allocationSize = 1, initialValue = 1)
 public class Ingresso implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	
+	/**
+	 * ID do Ingresso
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idingresso", length=10 , nullable=false, columnDefinition = "integer")
 	private Long idingresso;
 	
+	/**
+	 * Ligacao ManyToOne com a coluna "idsessao" da tabela "sessao"
+	 * ID da Sessao
+	 */
 	@ManyToOne
 	@JoinColumn(name="idsessao", referencedColumnName = "idsessao", nullable = false, columnDefinition = "integer")
 	private Sessao idsessao;
 	
+	/**
+	 * Nome do filme	
+	 */
 	@Column(name="nomfil", length=45 , nullable=false, columnDefinition = "varchar(45)")
 	private String nomfil;
 	
+	/**
+	 * Valor do Ingresso
+	 */
 	@Column(name="valing", length=3 , nullable=false, columnDefinition = "numeric")
 	private int valing;
+	
+	/**
+	 * Getters e Setters
+	 */
 
 	public Long getIdingresso() {
 		return idingresso;
