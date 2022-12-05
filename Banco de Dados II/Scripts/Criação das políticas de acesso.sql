@@ -1,6 +1,6 @@
 -- Criação dos grupos.
 
-create group Desenvolvedor;
+create group TI;
 
 create group Gerente;
 
@@ -16,12 +16,6 @@ with
 superuser
 password 'everto123';
 
-create user guilherme
-with password 'guilherme123';
-
-create user lucas
-with password 'lucas123';
-
 create user gerente1
 with password 'gerente123';
 
@@ -35,11 +29,7 @@ with password 'atendente123';
 
 -- Adicionando os usuários aos grupos;
 
-grant desenvolvedor to everto;
-
-grant desenvolvedor to guilherme;
-
-grant desenvolvedor to lucas;
+grant ti to everto;
 
 grant gerente to gerente1;
 
@@ -47,9 +37,9 @@ grant administrativo to administrativo1;
 
 grant atendente to atendente1;
 
--- Conceções de permissões ao grupo "Desenvolvedor".
+-- Conceções de permissões ao grupo "TI".
 
--- ao grupo de "desenvolvedor" é concedido total privilégio em todas as tabelas.
+-- ao grupo de "TI" é concedido total privilégio em todas as tabelas.
 
 grant all privileges
 on all tables in schema public
