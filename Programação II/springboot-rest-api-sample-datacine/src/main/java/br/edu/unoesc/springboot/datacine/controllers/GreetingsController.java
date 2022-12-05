@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.unoesc.springboot.datacine.model.Filme;
@@ -38,13 +35,6 @@ public class GreetingsController {
      */
        
 	
-//	**************** END POINT TESTE *******************
-	
-	@RequestMapping(value = "/oi", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public String greetingText() {
-        return "Hello World! Começa aqui o projeto DataCine...";
-    }
 
  
 //------------------------- FILME ------------------------- FILME ------------------------- FILME ------------------------- FILME -------------------------
@@ -53,12 +43,6 @@ public class GreetingsController {
     @Autowired // injeção de dependência
 	private FilmeRepository filmeRepository;
     
-    @GetMapping(value="listarTodosFilmes")	
-    @ResponseBody
-     public ResponseEntity<List<Filme>>listaFilme(){
-     	List<Filme> filme = filmeRepository.findAll();
-     	return new ResponseEntity<List<Filme>>(filme, HttpStatus.OK) ;
-     }
     	
 	@PostMapping(value = "salvarJSONFilme")
 	@ResponseBody

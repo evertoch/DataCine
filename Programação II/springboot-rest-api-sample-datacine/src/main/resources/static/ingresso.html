@@ -35,25 +35,21 @@
 	    		<label for="idingresso" class="form-label">ID:</label>
     			<input type="number" class="form-control" id="idingresso" readonly="readonly">
 			</div>
-<!-- 			<div class="col-4"> -->
-<!-- 	    		<label for="nome" class="form-label">Nome:</label> -->
-<!--     			<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required"> -->
-<!-- 			</div> -->
-			  <div class="col-1">
+			  <div class="col-md-1">
 		    	<label for="idsessao" class="form-label">ID da Sessão:</label>
     			<input type="number" class="form-control" id="idsessao" placeholder="ID da Sessão" required = "required" readonly="readonly">
     			<button type="button" class=" btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarSessao">Buscar</button>
   			</div>
-			<div class="col-3">
+			<div class="col-md-3">
 		    	<label for="nomfil" class="form-label">Nome do filme:</label>
     			<input type="text" class="form-control" id="nomfil" placeholder="Nome do Filme" required = "required" readonly="readonly">
   			</div>
 			<div class="w-100"></div>
-			<div class="col-2">
+			<div class="col-md-2">
 	    		<label for="nomsal" class="form-label">Nome da sala:</label>
     			<input type="text" class="form-control" id="nomsal" placeholder="Nome da Sala" required = "required" readonly="readonly">
 			</div>
-			<div class="col-1">
+			<div class="col-md-1">
 	    		<label for="horses" class="form-label">Horário:</label> <select
 					id="horses" class="form-select" required="required" readonly="readonly">
 					<option value="0" selected>Selecione</option>
@@ -76,10 +72,11 @@
 			</div>
 			<div class="w-100"></div><br>
   			<div class="buttons col-md-4">
-	    		<button type="button" class="btn btn-primary" onclick="salvarIngresso()">Salvar</button>
+	    		<button type="button" class="btn btn-primary" onclick="salvarIngresso(), window.print()">Salvar</button>
     			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroSessoes').reset();">Limpar</button>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarIngressos">Pesquisar</button>	
-				<button type="button" class="btn btn-danger" onclick="excluirIngressoBotao()">Excluir</button>	
+				<button type="button" class="btn btn-danger" onclick="excluirIngressoBotao()">Excluir</button>
+
   			</div>
   		</form>
 	</div>
@@ -119,7 +116,7 @@
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limparPesquisa()">Fechar</button>
 				</div>
 			</div>
 		</div>
@@ -160,7 +157,7 @@
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="limparPesquisa()">Fechar</button>
 				</div>
 			</div>
 		</div>

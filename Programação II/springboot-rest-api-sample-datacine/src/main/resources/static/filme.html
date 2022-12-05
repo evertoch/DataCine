@@ -25,7 +25,7 @@
 <body style= background-color:#e6e6e6;>
 
 
-<!--  Formulário Cadastro de filmes; -->
+<!--  ===INICIO FORMULÁRIO DE CADASTRO DE FILMES;=== -->
 	
 		<div class="formCadastroFilmes row justify-content-center">
 		<h2 class="col-md-3">Cadastro de Filmes</h2><br>
@@ -84,7 +84,11 @@
   			</div>
   		</form>
 	</div>
-  	
+	
+ <!--  ===FIM DO FORMULÁRIO CADASTRO DE FILMES;;=== -->
+ 
+ <!--  ===INICIO MODAL DE PESQUISAR FILMES;=== -->
+ 
   	<div class="modal" id="modalPesquisarFilme" tabindex="-1" aria-labelledby="Pesquisar Filmes" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -122,7 +126,8 @@
 			</div>
 		</div>
 	</div>
-	
+<!--  ===FIM MODAL DE PESQUISAR FILMES;=== -->
+
 	<script
   		src="https://code.jquery.com/jquery-3.6.1.min.js"
   		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -174,7 +179,7 @@
 				data : JSON.stringify({idfilme: idfilme, nome: nome, claind: claind, mesexi: mesexi, dubleg: dubleg, sinfil: sinfil}),
 				contentType : "application/json; charset=utf-8",
 				success : function(response){
-// 					$("#idfilme").val(response.idfilme); - O campo ID não voltará preenchido após clicar em salvar, o que facilita novos cadastros sem precisar "LIMPAR" os campos.
+// 					$("#idfilme").val(response.idfilme); -  O CAMPO ID NÃO VOLTARÁ PREENCHIDO APÓS CLICAR EM SALVAR, FACILITANDO NOVOS CADASTROS.
 					alert("Filme salvo com sucesso!");
 				}
 			}).fail(function (xhr, status, errorThrown){
@@ -182,7 +187,9 @@
 			});	
 		}	
 	
-// 	Função buscarFilmePorNome
+	
+	
+// 		Função buscarFilmePorNome()
 
 		function buscarFilmePorNome(){
 			var nomeFilmeBusca = $("#nomeFilmeBusca").val();
@@ -208,6 +215,8 @@
 				}); 
 // 			}		
 		}
+		
+		
 //	 	Função colocarFilmeEmEdicao
 
 		function colocarFilmeEmEdicao(idfilme) {		  
@@ -231,6 +240,7 @@
 				});		  
 		  }
 		  
+		  
 //	 	Função excluirFilme 
 
 		function excluirFilme(idfilme){		
@@ -248,6 +258,7 @@
 			});		 
 			}		
 		}
+		
 
 //	 	Função excluirFilmeBotao 
 

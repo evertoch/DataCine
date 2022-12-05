@@ -41,7 +41,7 @@ public class Filme implements Serializable{
 	@Column(name="claind", length=2 , nullable=false, columnDefinition = "integer")
 	private int claind;
 	
-	@Column(name="sinfil", length=255 , nullable=false, columnDefinition = "varchar(45)")
+	@Column(name="sinfil", length=255 , nullable=false, columnDefinition = "varchar(255)")
 	private String sinfil;
 	
 	
