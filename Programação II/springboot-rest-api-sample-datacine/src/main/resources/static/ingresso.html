@@ -57,7 +57,8 @@
 	    		<label for="horses" class="form-label">Horário:</label> <select
 					id="horses" class="form-select" required="required" readonly="readonly">
 					<option value="0" selected>Selecione</option>
-					<option value="16:00" >16:00</option>
+					<option value="14:00">14:00</option>
+					<option value="16:00">16:00</option>
 					<option value="19:00">19:00</option>
 					<option value="21:30">21:30</option>		
 				</select>
@@ -137,10 +138,10 @@
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="nomeSessaoBusca" class="col-form-label">Use o botão "Listar Todos":</label> 
-							<input type="text" class="form-control" id="nomeSessaoBusca" readonly="readonly">
+							<label for="nomeSessaoBusca" class="col-form-label">Informe o nome da Sessão:</label> 
+							<input type="text" class="form-control" id="nomeSessaoBusca">
 						</div>
-						<button type="button" class="btn btn-success" onclick="listarTodasSessoes()">Listar Todos</button>
+						<button type="button" class="btn btn-success" onclick="listarTodasSessoes()">Buscar</button>
 					</form>
 				</div>
 				<div style="height:300px; overflow:auto;">
@@ -242,7 +243,7 @@
 									response[i].idsessao.idfilme.nome + '</td><td>' +
 									response[i].idsessao.idsala.nome + '</td><td>' +
 									response[i].idsessao.horses + '</td><td>' +
-									response[i].valing +'</td><td> <button type="button" onclick="colocarIngressoEmEdicao('+response[i].idingresso +')"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirIngresso('+response[i].idingresso +')">x</button></td></tr>')						
+									response[i].valing +'</td><td> <button type="button" onclick="colocarIngressoEmEdicao('+response[i].idingresso +'), limparPesquisa()"class="btn btn-primary">+</button></td> <td><button type="button" class="btn btn-danger" onclick="excluirIngresso('+response[i].idingresso +'), limparPesquisa()">x</button></td></tr>')						
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
@@ -321,7 +322,7 @@
 									response[i].nome + '</td><td>' +
 									response[i].idfilme.nome + '</td><td>' +
 									response[i].idsala.nome + '</td><td>' +									
-									response[i].horses +'</td><td> <button type="button" onclick="colocarSessaoEmEdicao('+response[i].idsessao +')"class="btn btn-primary">+</button></td></tr>')					
+									response[i].horses +'</td><td> <button type="button" onclick="colocarSessaoEmEdicao('+response[i].idsessao +'), limparPesquisa() "class="btn btn-primary">+</button></td></tr>')					
 						}
 					}
 				}).fail(function (xhr, status, errorThrown){ 
@@ -349,6 +350,11 @@
 				});		  
 		  }
 
+// ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS -------------------------	  
+
+		function limparPesquisa(){
+			$("#tabelaresultados > tbody > tr").remove();
+		}
 	
 		
 	</script>

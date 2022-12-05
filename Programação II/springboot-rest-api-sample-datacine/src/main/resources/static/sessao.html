@@ -53,13 +53,15 @@
 			<div class="col-md-1">
 				<label for="horses" class="form-label">Horário:</label> <select
 					id="horses" class="form-select" required="required">
-					<option value="16:00" selected>16:00</option>
+					<option value="0" selected>Selecionse</option>
+					<option value="14:00">14:00</option>
+					<option value="16:00">16:00</option>
 					<option value="19:00">19:00</option>
 					<option value="21:30">21:30</option>		
 				</select>
 			</div>
 			<div class="w-100"></div><br>
-  			<div class="buttons col-md-4">
+  			<div class="buttons col-md-5">
 	    		<button type="button" class="btn btn-primary" onclick="salvarSessao()">Salvar</button>
     			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroSessoes').reset();">Limpar</button>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarSessao">Pesquisar</button>	
@@ -80,10 +82,10 @@
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="nomeSessaoBusca" class="col-form-label">Use o botão "Listar Todos":</label> 
-							<input type="text" class="form-control" id="nomeSessaoBusca" readonly="readonly">
+							<label for="nomeSessaoBusca" class="col-form-label">Informe o nome da Sessão:</label> 
+							<input type="text" class="form-control" id="nomeSessaoBusca" placeholder="Nome">
 						</div>
-						<button type="button" class="btn btn-success" onclick="listarTodasSessoes()">Listar Todos</button>
+						<button type="button" class="btn btn-success" onclick="listarTodasSessoes()">Buscar</button>
 					</form>
 				</div>
 				<div style="height:300px; overflow:auto;">
@@ -217,7 +219,11 @@
 				alert("Selecione um filme!");
 				$("#idfilme").focus();
 				return;
-			
+			}	
+			if(horses == 0){
+					alert("Selecione um horário");
+					$("#horses").focus();
+					return;
 			}	
 			if(nome == ""){
 					alert("Informe um nome!");
