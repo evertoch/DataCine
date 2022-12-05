@@ -25,7 +25,7 @@
 <body style= background-color:#e6e6e6;>
 
 
-<!-- Formulário Cadastro de Sessões; -->
+<!--  ===INICIO FORMULÁRIO DE CADASTRO DE INGRESSOS;=== -->
 	
 	<div class="formCadastroSessoes row justify-content-center">
 		<h2 class="row col-md-3">Venda de Ingressos</h2><br>
@@ -51,7 +51,7 @@
 			</div>
 			<div class="col-md-1">
 	    		<label for="horses" class="form-label">Horário:</label> <select
-					id="horses" class="form-select" required="required" readonly="readonly">
+					id="horses" class="form-select" required="required" >
 					<option value="0" selected>Selecione</option>
 					<option value="14:00">14:00</option>
 					<option value="16:00">16:00</option>
@@ -71,7 +71,7 @@
 				</select>
 			</div>
 			<div class="w-100"></div><br>
-  			<div class="buttons col-md-4">
+  			<div class="buttons col-md-5">
 	    		<button type="button" class="btn btn-primary" onclick="salvarIngresso(), window.print()">Salvar</button>
     			<button type="button" class="btn btn-secondary" onclick ="document.getElementById('formCadastroSessoes').reset();">Limpar</button>
 				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarIngressos">Pesquisar</button>	
@@ -80,9 +80,9 @@
   			</div>
   		</form>
 	</div>
-<!-- Fim do Formulário Cadastro de sessaos; -->
+<!--  ===FIM DO FORMULÁRIO DE CADASTRO DE INGRESSOS;=== -->
 
-<!--  Tela do botão Pesquisar; -->  	
+<!--  ===INICIO MODAL DE PESQUISAR INGRESSOS;=== --> 	
   	<div class="modal" id="modalPesquisarIngressos" tabindex="-1" aria-labelledby="Pesquisar Ingressos" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -121,10 +121,10 @@
 			</div>
 		</div>
 	</div>
-<!--  Fim da Tela do botão Pesquisar; -->  
+<!--  ===FIM MODAL DE PESQUISAR INGRESSOS;=== --> 
 
 	
-<!--  Tela do botão "Buscar" em ID da Sessão; -->  		
+<!--  ===INICIO MODAL DE BUSCAR EM "ID DA SESSÃO";=== --> 	 		
 	  	<div class="modal" id="modalPesquisarSessao" tabindex="-1" aria-labelledby="Pesquisar Ingressos" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -162,7 +162,7 @@
 			</div>
 		</div>
 	</div>
-<!--  Fim da tela do botão "Buscar" em ID do Filme; -->
+<!--  ===FIM MODAL DE BUSCAR EM "ID DA SESSÃO";=== --> 	 		
 	
 	<script
   		src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -189,7 +189,7 @@
 
 //------------------------- INGRESSO ------------------------- INGRESSO ------------------------- INGRESSO ------------------------- INGRESSO -------------------------
 
-// Função salvarIngresso
+// 		Função salvarIngresso
 
 		function salvarIngresso(){
 			var idingresso = $("#idingresso").val();
@@ -251,9 +251,9 @@
 		
 //      Função colocarIngressoEmEdicao
 	  
-			function colocarIngressoEmEdicao(idingresso) {		  
-				  $.ajax({
-						method : "GET",
+		function colocarIngressoEmEdicao(idingresso) {		  
+			$.ajax({
+					method : "GET",
 						url : "buscarIngressoId",
 						data : "idingresso=" + idingresso,
 						success : function(response) {
@@ -268,12 +268,13 @@
 					}).fail(function(xhr, status, errorThrown) {
 						alert("Erro ao buscar sessão por id!");
 					});		  
-			  }
+		}
+			  
 		  
 //	 	Função excluirIngresso 
 
 		function excluirIngresso(idingresso){		
-			if(confirm('Deseja realmente excluir o ingresso selecionado?')) {		
+				if(confirm('Deseja realmente excluir o ingresso selecionado?')) {		
 			 $.ajax({
 				method : "DELETE",
 				url : "deletarIngressoId",
@@ -291,8 +292,8 @@
 //	 	Função excluirSalaBotao 
 
 		function excluirIngressoBotao(){
-			var idingresso = $('#idingresso').val();		
-			if(idingresso != null && idingresso.trim() != ''){
+				var idingresso = $('#idingresso').val();		
+				if(idingresso != null && idingresso.trim() != ''){
 			 excluirIngresso(idingresso);
 			 document.getElementById('formCadastroSala').reset();
 			}
@@ -349,6 +350,8 @@
 
 // ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS -------------------------	  
 
+// 		Função limparPesquisa(){
+	
 		function limparPesquisa(){
 			$("#tabelaresultados > tbody > tr").remove();
 		}

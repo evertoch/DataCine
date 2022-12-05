@@ -26,7 +26,7 @@
 
 
 
-<!--  Formulário Cadastro de salas; -->
+<!--  ===INICIO FORMULÁRIO DE CADASTRO DE SALAS;=== -->
 	
 	<div class="formCadastroSalas row justify-content-center">
 		<h2 class="col-md-3">Cadastro de Salas</h2><br>
@@ -36,7 +36,7 @@
 	    		<label for="idsala" class="form-label">ID:</label>
     			<input type="text" class="form-control" id="idsala" readonly="readonly">
 			</div>
-  			<div class="col-3">
+  			<div class="col-md-3">
 		    	<label for="nome" class="form-label">Nome:</label>
     			<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required">
   			</div>
@@ -53,8 +53,9 @@
   			</div>
   		</form>
 	</div>
+<!--  ===FIM DO FORMULÁRIO DE CADASTRO DE SALAS;=== -->
 
-  	
+<!--  ===INICIO MODAL DE PESQUISAR SALAS;=== -->
   	<div class="modal" id="modalPesquisarSala" tabindex="-1" aria-labelledby="Pesquisar Salas" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -90,6 +91,7 @@
 			</div>
 		</div>
 	</div>
+<!--  ===FIM MODAL DE PESQUISAR SALAS;=== -->
 	
 	<script
   		src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -105,8 +107,10 @@
 	</script>
 		
 	<script type="text/javascript">
+	
+//------------------------- SALA ------------------------- SALA ------------------------- SALA ------------------------- SALA -------------------------
 
-// Função salvarSala
+// 		Função salvarSala()
 
 		function salvarSala(){
 			var idsala = $("#idsala").val();
@@ -137,6 +141,7 @@
 				});	
 			}
 			
+			
 //	 	Função buscarSalaPorNome
 
 		function buscarSalaPorNome(){
@@ -162,7 +167,9 @@
 // 			}		
 		}
 		
+		
 //      Função colocarSalaEmEdicao
+
 		function colocarSalaEmEdicao(idsala) {		  
 			  $.ajax({
 					method : "GET",
@@ -181,6 +188,7 @@
 				});		  
 		  }
 		  
+		  
 //	 	Função excluirSala 
 
 		function excluirSala(idsala){		
@@ -198,6 +206,7 @@
 			});		 
 			}		
 		}
+		
 
 //	 	Função excluirSalaBotao 
 

@@ -25,7 +25,7 @@
 <body style= background-color:#e6e6e6;>
 
 
-<!-- Formulário Cadastro de Sessões; -->
+<!--  ===INICIO FORMULÁRIO DE CADASTRO DAS SESSÕES;=== -->
 	
 	<div class="formCadastroSessoes row justify-content-center">
 		<h2 class="row col-md-3">Cadastro de Sessões</h2><br>
@@ -35,17 +35,17 @@
 	    		<label for="idsessao" class="form-label">ID:</label>
     			<input type="number" class="form-control" id="idsessao" readonly="readonly">
 			</div>
-			<div class="col-4">
+			<div class="col-md-4">
 	    		<label for="nome" class="form-label">Nome:</label>
     			<input type="text" class="form-control" id="nome" placeholder="Nome" required = "required">
 			</div>
 			<div class="w-100"></div>
-  			<div class="col-2">
+  			<div class="col-md-2">
 		    	<label for="idfilme" class="form-label">Filme:</label>
     			<input type="number" class="form-control" id="idfilme" placeholder="ID do Filme" required = "required" readonly="readonly">
     			<button type="button" class=" btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarFilmes">Buscar</button>
   			</div>
-			<div class="col-2">
+			<div class="col-md-2">
 		    	<label for="idsala" class="form-label">Sala:</label>
     			<input type="number" class="form-control" id="idsala" placeholder="ID da Sala" required = "required" readonly="readonly">
     			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPesquisarSalas">Buscar</button>
@@ -69,9 +69,9 @@
   			</div>
   		</form>
 	</div>
-<!-- Fim do Formulário Cadastro de sessaos; -->
+<!--  ===FIM FORMULÁRIO DE CADASTRO DAS SESSÕES;=== -->
 
-<!--  Tela do botão Pesquisar; -->  	
+<!--  ===INICIO MODAL DE PESQUISAR SESSÕES;=== --> 	
   	<div class="modal" id="modalPesquisarSessao" tabindex="-1" aria-labelledby="Pesquisar Sessoes" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -109,10 +109,10 @@
 			</div>
 		</div>
 	</div>
-<!--  Fim da Tela do botão Pesquisar; -->  
+<!--  ===FIM MODAL DE PESQUISAR SALAS;=== -->
 
 	
-<!--  Tela do botão "Buscar" em ID do Filme; -->  		
+<!--  ===INICIO MODAL DE BUSCAR EM "ID DO FILME";=== --> 	 		
 		<div class="modal" id="modalPesquisarFilmes" tabindex="-1" aria-labelledby="Pesquisar Filmes" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -147,10 +147,10 @@
 			</div>
 		</div>
 	</div>
-<!--  Fim da tela do botão "Buscar" em ID do Filme; -->
+<!--  ===FIM DO MODAL DE BUSCAR EM "ID DO FILME";=== -->
 
 
-<!--  Tela do botão "Buscar" em ID da sala; -->
+<!--  ===INICIO MODAL DE BUSCAR EM "ID DO SALA";=== -->
 			<div class="modal" id="modalPesquisarSalas" tabindex="-1" aria-labelledby="Pesquisar Salas" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -161,7 +161,7 @@
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="nomeSalaBusca" class="col-form-label">Informe a descrição da sala:</label> 
+							<label for="nomeSalaBusca" class="col-form-label">Informe o nome da sala:</label> 
 							<input type="text" class="form-control" id="nomeSalaBusca">
 						</div>
 						<button type="button" class="btn btn-success" onclick="buscarSalaPorNome()">Buscar</button>
@@ -185,7 +185,7 @@
 			</div>
 		</div>
 	</div>	
-<!-- Fim da tela do botão "Buscar" em ID da sala; -->
+<!--  ===FIM DO MODAL DE BUSCAR EM "ID DA SALA";=== -->
 	
 	<script
   		src="https://code.jquery.com/jquery-3.6.1.min.js"
@@ -278,6 +278,7 @@
 		
 		
 //      Função colocarSessaoEmEdicao
+
 		function colocarSessaoEmEdicao(idsessao) {		  
 			  $.ajax({
 					method : "GET",
@@ -326,7 +327,8 @@
 
 //------------------------- FILME ------------------------- FILME ------------------------- FILME ------------------------- FILME -------------------------
 
-// 			Função buscarFilmePorNome
+// 		Função buscarFilmePorNome
+
 		function buscarFilmePorNome(){
 			var nomeFilmeBusca = $("#nomeFilmeBusca").val();
 				$.ajax({ 
@@ -366,7 +368,8 @@
 
 //------------------------- SALA ------------------------- SALA ------------------------- SALA ------------------------- SALA -------------------------
 		
-// 			Função buscarSalaPorNome
+// 		Função buscarSalaPorNome
+
 		function buscarSalaPorNome(){
 			var nomeSalaBusca = $("#nomeSalaBusca").val();
 // 			if (nomeSalaBusca != null && nomeSalaBusca.trim()!= ''){ -- PODE CONSULTAR TODOS SEM INFORMAR NOME, APENAS CLICANDO EM BUSCAR.
@@ -389,9 +392,10 @@
 // 			}		
 		}
 
+
 //      Função preencherSalaFormulario
 
-			function preencherSalaFormulario(idsala) {		  
+		function preencherSalaFormulario(idsala) {		  
 			  $.ajax({
 					method : "GET",
 					url : "buscarSalaId",
@@ -410,7 +414,9 @@
 
 // ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS ------------------------- COMPLEMENTOS -------------------------	  
 
-			function limparPesquisa(){
+// 		Função limparPesquisa(){
+	
+		function limparPesquisa(){
 				$("#tabelaresultados > tbody > tr").remove();
 			}
 
