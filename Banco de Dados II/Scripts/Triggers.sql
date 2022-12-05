@@ -29,7 +29,7 @@ Language plpgsql;
 
 -- Criação da Trigger:
 
-create trigger filme_afeter_tg
+create trigger filme_after_tg
 after insert or update or delete
 on filme
 for each row
